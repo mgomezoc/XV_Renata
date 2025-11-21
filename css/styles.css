@@ -719,13 +719,7 @@ a:hover {
 
 /* ---------- Clima & Qué hacer ---------- */
 
-.section-weather .weatherwidget-io {
-  display: inline-block !important;
-  margin-top: 1rem;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
+/* Sin estilos específicos del widget ya que fue removido */
 
 /* ---------- Hospedaje & Hair/Makeup ---------- */
 
