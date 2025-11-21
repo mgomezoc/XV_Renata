@@ -1,15 +1,25 @@
+/* ===========================
+   XV Renata - Alice Wonderland
+   styles.css
+   =========================== */
+
+/* ---------- Variables y base ---------- */
+
 :root {
-  --color-bg: #ece8e2;
-  --color-bg-alt: #d6d1bf;
-  --color-primary: #968e6f;
-  --color-dark: #292929;
-  --color-light: #fdfaf5;
-  --color-accent: #c2b890;
+  /* Paleta Alice in Wonderland */
+  --color-bg: #140b25;
+  --color-bg-alt: #21123a;
+  --color-primary: #2b7c86;
+  --color-dark: #0b0614;
+  --color-light: #fff7ec;
+  --color-accent: #ffd48a;
+  --color-rose: #e85b81;
+  --color-rose-deep: #c7375c;
 
   --radius-lg: 1.2rem;
   --radius-md: 0.75rem;
 
-  --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.18);
+  --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.25);
 }
 
 *,
@@ -24,158 +34,259 @@ html {
 
 body {
   margin: 0;
-  font-family: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "Quicksand", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
   background-color: var(--color-bg);
-  color: var(--color-dark);
+  color: var(--color-light);
+}
+
+/* Reset links */
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
 }
 
 /* Utilidades */
 
+.tracking-wide {
+  letter-spacing: 0.18em;
+}
+
+/* ---------- Secciones y layout ---------- */
+
 .section {
+  position: relative;
   padding: 4.5rem 0;
 }
 
-.section-light {
-  background-color: var(--color-light);
+.section-intro,
+.section-gift,
+.section-hospedaje,
+.section-extras,
+.section-weather {
+  background-color: var(--color-bg-alt);
 }
 
 .section-dark {
   background-color: var(--color-dark);
-  color: #f9f7f3;
+  color: var(--color-light);
 }
 
-.section-gift {
+.section-light {
   background-color: var(--color-bg-alt);
 }
 
+.section-gallery {
+  background-color: var(--color-bg);
+}
+
+/* Texto común de secciones */
+
 .section-eyebrow {
   text-transform: uppercase;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.18em;
   font-size: 0.75rem;
-  color: var(--color-primary);
+  color: var(--color-accent);
   margin-bottom: 0.5rem;
 }
 
 .section-title {
-  font-family: "Cormorant Garamond", "Times New Roman", serif;
-  font-weight: 500;
-  font-size: 2.2rem;
-  letter-spacing: 0.06em;
+  font-family: "Alice", "Times New Roman", serif;
+  font-weight: 400;
+  font-size: 2.3rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   margin-bottom: 1.2rem;
+  color: var(--color-light);
 }
 
 .section-text {
   font-size: 0.95rem;
-  line-height: 1.6;
-  color: rgba(0, 0, 0, 0.75);
+  line-height: 1.7;
+  color: rgba(255, 247, 236, 0.85);
 }
 
-.section-dark .section-eyebrow {
+.section-text.small {
+  font-size: 0.85rem;
+}
+
+/* Mini títulos (cards) */
+
+.mini-title {
+  font-family: "Alice", serif;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  margin-bottom: 0.4rem;
   color: var(--color-accent);
 }
 
-.section-dark .section-title,
-.section-dark .section-text {
-  color: #fdfaf5;
-}
-
-/* Header */
+/* ---------- Header / Navbar ---------- */
 
 .main-header .navbar {
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(14px);
+  background: linear-gradient(
+    to right,
+    rgba(20, 11, 37, 0.94),
+    rgba(31, 77, 104, 0.9)
+  ) !important;
 }
 
 .navbar-brand {
-  font-family: "Cormorant Garamond", serif;
-  letter-spacing: 0.16em;
-}
-
-.nav-link {
+  font-family: "Alice", serif;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  letter-spacing: 0.16em;
-  font-size: 0.72rem;
+  font-size: 0.82rem;
+  color: var(--color-accent) !important;
 }
 
-/* Hero */
+.navbar-nav .nav-link {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+  color: rgba(255, 247, 236, 0.85);
+  padding-inline: 0.9rem;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus {
+  color: var(--color-accent);
+}
+
+/* ---------- Hero ---------- */
 
 .hero {
   position: relative;
   min-height: 100vh;
-  background: url("../images/hero-placeholder.jpg") center center / cover no-repeat;
+  display: flex;
+  align-items: center;
+  background: url("../images/hero-placeholder.jpg") center center / cover
+    no-repeat;
   color: #ffffff;
 }
 
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.35),
-    rgba(0, 0, 0, 0.55)
-  );
+  background: radial-gradient(
+      circle at top,
+      rgba(255, 212, 138, 0.18),
+      transparent 60%
+    ),
+    linear-gradient(to bottom, rgba(11, 6, 20, 0.85), rgba(11, 6, 20, 0.95));
+}
+
+.hero .container {
+  position: relative;
+  z-index: 1;
 }
 
 .hero-kicker {
-  letter-spacing: 0.18em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   font-size: 0.8rem;
   opacity: 0.9;
+  color: var(--color-accent);
 }
 
 .hero-title {
-  font-family: "Cormorant Garamond", serif;
-  letter-spacing: 0.18em;
+  font-family: "Alice", serif;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
+  font-size: 3rem;
 }
 
 .hero-subtitle {
   font-size: 1rem;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  opacity: 0.9;
+  opacity: 0.95;
 }
 
 .hero-cta .btn {
   border-radius: 999px;
 }
 
-/* Countdown */
+.hero-cta .btn-light {
+  color: #140b25;
+}
+
+/* ---------- Botón de audio ---------- */
+
+.audio-toggle {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  border: 2px solid var(--color-accent);
+  background: radial-gradient(circle at top, #e85b81, #140b25);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+  z-index: 2000;
+}
+
+.audio-toggle.is-playing {
+  background: radial-gradient(circle at top, #ffd48a, #2b7c86);
+  color: #140b25;
+}
+
+/* ---------- Countdown ---------- */
 
 .section-countdown {
   position: relative;
-  background: url("../images/countdown-placeholder.jpg") center / cover fixed no-repeat;
+  background: url("../images/countdown-placeholder.jpg") center / cover
+    fixed no-repeat;
   color: #ffffff;
+  padding: 4.5rem 0;
 }
 
 .section-countdown .section-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.55);
+  background: linear-gradient(
+    to bottom,
+    rgba(11, 6, 20, 0.9),
+    rgba(43, 124, 134, 0.8)
+  );
 }
 
-.section-countdown .section-title,
-.section-countdown .section-eyebrow {
-  color: #ffffff;
+.section-countdown .container {
+  position: relative;
+  z-index: 1;
 }
 
 .countdown-grid {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.5rem;
+  justify-items: center;
 }
 
 .countdown-item {
   text-align: center;
-  min-width: 90px;
+  padding: 1.1rem 1.4rem;
+  border-radius: 999px;
+  background: rgba(12, 7, 26, 0.8);
+  border: 1px solid rgba(255, 244, 220, 0.2);
+  min-width: 120px;
 }
 
 .countdown-number {
   display: block;
-  font-family: "Cormorant Garamond", serif;
-  font-size: 2.5rem;
-  letter-spacing: 0.15em;
+  font-family: "Alice", serif;
+  font-size: 2.2rem;
+  letter-spacing: 0.16em;
+  color: var(--color-accent);
 }
 
 .countdown-label {
@@ -184,13 +295,13 @@ body {
   font-size: 0.7rem;
 }
 
-/* Itinerario */
+/* ---------- Itinerario ---------- */
 
 .timeline-card {
-  background: linear-gradient(135deg, #35302a, #26221f);
+  background: radial-gradient(circle at top, #2b7c86, #140b25);
   border-radius: var(--radius-lg);
   padding: 1.6rem 1.4rem;
-  color: #fdfaf5;
+  color: #fff7ec;
   box-shadow: var(--shadow-soft);
   height: 100%;
 }
@@ -199,49 +310,53 @@ body {
   width: 48px;
   height: 48px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 244, 220, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 0.8rem;
+  background: rgba(20, 11, 37, 0.8);
 }
 
 .timeline-icon i {
   font-size: 1.1rem;
+  color: var(--color-accent);
 }
 
 .timeline-title {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 1.3rem;
+  font-family: "Alice", serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  letter-spacing: 0.11em;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.3rem;
 }
 
 .timeline-meta {
-  font-size: 0.8rem;
-  letter-spacing: 0.12em;
+  font-size: 0.82rem;
   text-transform: uppercase;
-  opacity: 0.8;
-  margin-bottom: 0.8rem;
+  letter-spacing: 0.16em;
+  color: rgba(255, 247, 236, 0.75);
+  margin-bottom: 0.5rem;
 }
 
 .timeline-text {
   font-size: 0.9rem;
 }
 
-/* Dress code */
-
-.section-intro,
-.section-light {
-  background-color: var(--color-bg);
-}
+/* ---------- Dress code ---------- */
 
 .dresscode-illustration {
   max-width: 220px;
 }
 
-/* RSVP */
+/* ---------- Mesa de regalos ---------- */
+
+.section-gift .btn {
+  border-radius: 999px;
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+/* ---------- RSVP ---------- */
 
 .section-rsvp {
   position: relative;
@@ -252,137 +367,150 @@ body {
 .section-rsvp .section-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.55);
+  background: linear-gradient(
+    135deg,
+    rgba(11, 6, 20, 0.9),
+    rgba(232, 91, 129, 0.7)
+  );
 }
 
-.section-rsvp .section-title,
-.section-rsvp .section-text,
-.section-rsvp .section-eyebrow {
-  color: #ffffff;
+.section-rsvp .container {
+  position: relative;
+  z-index: 1;
 }
 
 .rsvp-card {
-  background: rgba(20, 20, 20, 0.8);
+  background: rgba(12, 7, 26, 0.9);
   border-radius: var(--radius-lg);
   padding: 2rem;
   box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(255, 244, 220, 0.12);
 }
 
 .rsvp-card .form-label {
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.16em;
+  color: var(--color-accent);
 }
+
+/* Inputs */
 
 .rsvp-card .form-control,
 .rsvp-card .form-select,
 .song-form .form-control {
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background-color: rgba(255, 255, 255, 0.06);
-  color: #ffffff;
+  border: 1px solid rgba(255, 244, 220, 0.25);
+  background-color: rgba(255, 247, 236, 0.04);
+  color: #fff7ec;
   font-size: 0.9rem;
 }
 
 .rsvp-card textarea.form-control {
   border-radius: 1rem;
-  background-color: rgba(255, 255, 255, 0.06);
 }
 
-.rsvp-card .form-control::placeholder {
-  color: rgba(255, 255, 255, 0.65);
+.rsvp-card .form-control::placeholder,
+.song-form .form-control::placeholder {
+  color: rgba(255, 247, 236, 0.7);
+}
+
+.rsvp-card .form-check-input {
+  border-radius: 999px;
 }
 
 .rsvp-card .form-check-label {
   font-size: 0.85rem;
 }
 
+/* Personas */
+
 .personas-field {
   display: inline-flex;
   align-items: center;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 0.25rem 0.75rem;
   gap: 0.75rem;
-  background: rgba(0, 0, 0, 0.2);
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 244, 220, 0.25);
+  background-color: rgba(255, 247, 236, 0.04);
 }
 
 .personas-btn {
-  border: none;
-  background: transparent;
-  color: #ffffff;
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
   border-radius: 999px;
-  display: flex;
+  border: none;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  background-color: rgba(255, 247, 236, 0.06);
+  color: var(--color-accent);
+  cursor: pointer;
 }
 
 .personas-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 247, 236, 0.15);
 }
 
 .personas-value {
-  min-width: 22px;
+  min-width: 1.5rem;
   text-align: center;
   font-weight: 600;
 }
 
-.rsvp-feedback {
-  font-size: 0.9rem;
+/* Feedback */
+
+.rsvp-feedback,
+.form-feedback {
+  font-size: 0.85rem;
 }
 
-/* Transporte / hospedaje */
+/* ---------- Transporte ---------- */
 
-.section-hospedaje {
-  background-color: var(--color-light);
+.section-light .btn {
+  border-radius: 999px;
 }
+
+/* ---------- Clima & Qué hacer ---------- */
+
+.section-weather .weatherwidget-io {
+  display: inline-block !important;
+  margin-top: 0.75rem;
+}
+
+/* ---------- Hospedaje & Hair/Makeup ---------- */
 
 .hotel-card {
-  background: #ffffff;
+  background-color: rgba(12, 7, 26, 0.85);
   border-radius: var(--radius-md);
-  padding: 1.3rem 1.1rem;
+  padding: 1.2rem 1.4rem;
   margin-bottom: 1rem;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+  border: 1px solid rgba(255, 244, 220, 0.12);
 }
 
-/* Extras */
-
-.section-extras {
-  background-color: var(--color-bg-alt);
+.hotel-card .btn {
+  border-radius: 999px;
 }
 
-.mini-title {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 1.2rem;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  margin-bottom: 0.4rem;
+/* ---------- Extras ---------- */
+
+.song-form .btn {
+  border-radius: 999px;
 }
 
-.section-weather {
-  background-color: var(--color-bg);
-}
-
-/* Galería */
-
-.section-gallery {
-  background-color: var(--color-light);
-}
+/* ---------- Galería ---------- */
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
 }
 
 .gallery-item {
-  display: block;
+  position: relative;
+  border-radius: 1rem;
   overflow: hidden;
-  border-radius: var(--radius-md);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-  background: #f3f0ea;
+  cursor: pointer;
 }
 
 .gallery-item img {
@@ -390,85 +518,84 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 220ms ease-out;
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.gallery-item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at center,
+    transparent 40%,
+    rgba(0, 0, 0, 0.5)
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
 
 .gallery-item:hover img {
   transform: scale(1.05);
+  filter: brightness(1.05);
 }
 
-/* Audio toggle */
-
-.audio-toggle {
-  position: fixed;
-  right: 1rem;
-  bottom: 1rem;
-  width: 48px;
-  height: 48px;
-  border-radius: 999px;
-  border: none;
-  background: rgba(0, 0, 0, 0.75);
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
-  z-index: 2000;
+.gallery-item:hover::after {
+  opacity: 1;
 }
 
-.audio-toggle i {
-  font-size: 1.1rem;
-}
-
-.audio-toggle.is-playing {
-  background: var(--color-primary);
-}
-
-/* Footer */
+/* ---------- Footer ---------- */
 
 .site-footer {
-  background-color: #111111;
-  color: rgba(255, 255, 255, 0.8);
-  padding: 1.5rem 0 1.2rem;
+  padding: 2.5rem 0 2rem;
+  background-color: #0b0614;
+  color: rgba(255, 247, 236, 0.7);
   font-size: 0.85rem;
 }
 
 .site-footer a {
-  color: #ffffff;
-  text-decoration: none;
+  color: var(--color-accent);
 }
 
 .site-footer a:hover {
   text-decoration: underline;
 }
 
-/* Responsivo */
+/* ---------- Responsive ---------- */
 
-@media (max-width: 767.98px) {
+@media (min-width: 576px) {
+  .hero-title {
+    font-size: 3.4rem;
+  }
+
+  .countdown-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) {
   .section {
-    padding: 3.75rem 0;
+    padding: 5rem 0;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .hero {
-    text-align: center;
-    padding-top: 5rem;
-    padding-bottom: 3rem;
+    min-height: 100vh;
   }
+}
 
+@media (min-width: 992px) {
   .hero-title {
-    font-size: 2.3rem;
+    font-size: 3.8rem;
   }
 
   .section-title {
-    font-size: 1.8rem;
+    font-size: 2.6rem;
   }
 
-  .rsvp-card {
-    padding: 1.6rem 1.25rem;
-  }
-
-  .audio-toggle {
-    width: 44px;
-    height: 44px;
+  .gallery-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
