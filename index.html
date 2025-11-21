@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Nombre de la Quinceañera — XV Años</title>
+    <meta name="description" content="Invitación digital para XV años." />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Nombre de la Quinceañera — XV Años" />
+    <meta property="og:description" content="Acompáñanos a celebrar este día tan especial." />
+    <meta property="og:image" content="images/og-cover.jpg" />
+    <meta property="og:url" content="https://tusitio.com/xv/nombre-quinceanera" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;500;700&family=Montserrat:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap 5 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- AOS (animaciones on scroll) -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+    <!-- GLightbox (galería) -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+
+    <!-- Estilos propios -->
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <link rel="icon" href="images/favicon.ico" />
+  </head>
+  <body>
+    <!-- Audio de fondo -->
+    <audio id="bg-audio" src="images/song.mp3" preload="none"></audio>
+
+    <!-- Botón flotante de audio -->
+    <button class="audio-toggle" type="button" aria-label="Reproducir música" data-audio-toggle>
+      <i class="fa-solid fa-volume-off"></i>
+    </button>
+
+    <!-- Header / Navbar -->
+    <header class="main-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark bg-opacity-75 fixed-top">
+        <div class="container">
+          <a class="navbar-brand fw-semibold text-uppercase tracking-wide" href="#hero" data-scroll>
+            XV Nombre
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNavbar"
+            aria-controls="mainNavbar"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse justify-content-end" id="mainNavbar">
+            <ul class="navbar-nav align-items-center">
+              <li class="nav-item">
+                <a class="nav-link" href="#itinerario" data-scroll>Itinerario</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#mesa-regalos" data-scroll>Mesa de regalos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#rsvp" data-scroll>Asistencia</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#hospedaje" data-scroll>Hospedaje</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#extras" data-scroll>Extras</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#galeria" data-scroll>Galería</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Hero -->
+      <section id="hero" class="hero d-flex align-items-center">
+        <div class="hero-overlay"></div>
+        <div class="container position-relative">
+          <div class="row justify-content-center">
+            <div class="col-lg-8 text-center" data-aos="fade-up">
+              <p class="hero-kicker mb-2">Con la bendición de Dios y de nuestros padres</p>
+              <h1 class="hero-title display-4 mb-2">Nombre de la Quinceañera</h1>
+              <p class="hero-subtitle mb-4">Sábado · 01 de octubre · 2027 · Monterrey, N.L.</p>
+
+              <div class="hero-cta d-flex flex-column flex-sm-row justify-content-center gap-3">
+                <a
+                  href="https://www.google.com/calendar/render?action=TEMPLATE&text=XV+Nombre+Quinceañera&details=Te+esperamos+para+celebrar+mis+XV+a%C3%B1os.&location=Nombre+del+sal%C3%B3n&dates=20271002T010000Z/20271002T060000Z"
+                  target="_blank"
+                  rel="noopener"
+                  class="btn btn-light btn-lg"
+                >
+                  <i class="fa-regular fa-calendar-plus me-2"></i>
+                  Agregar a calendario
+                </a>
+                <a href="#rsvp" data-scroll class="btn btn-outline-light btn-lg">
+                  Confirmar asistencia
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Intro / Padres -->
+      <section id="intro" class="section section-intro">
+        <div class="container">
+          <div class="row justify-content-center mb-4">
+            <div class="col-lg-8 text-center" data-aos="fade-up">
+              <p class="section-eyebrow">Nuestros padres</p>
+              <h2 class="section-title">Con cariño los invitamos a celebrar</h2>
+              <p class="section-text">
+                Nombre de Papá de la quinceañera &amp; Nombre de Mamá de la quinceañera<br />
+                tienen el honor de invitarte a los XV años de su hija
+                <strong>Nombre de la Quinceañera</strong>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Countdown -->
+      <section
+        id="countdown"
+        class="section section-countdown"
+        data-event-date="2027-10-01T19:00:00"
+      >
+        <div class="section-overlay"></div>
+        <div class="container position-relative">
+          <div class="row justify-content-center">
+            <div class="col-12 text-center text-uppercase mb-4" data-aos="fade-up">
+              <p class="section-eyebrow text-light">Falta muy poco</p>
+              <h2 class="section-title text-light">Cuenta regresiva</h2>
+            </div>
+
+            <div class="col-12">
+              <div class="countdown-grid" data-aos="fade-up" data-aos-delay="100">
+                <div class="countdown-item">
+                  <span id="cd-days" class="countdown-number">00</span>
+                  <span class="countdown-label">Días</span>
+                </div>
+                <div class="countdown-item">
+                  <span id="cd-hours" class="countdown-number">00</span>
+                  <span class="countdown-label">Horas</span>
+                </div>
+                <div class="countdown-item">
+                  <span id="cd-minutes" class="countdown-number">00</span>
+                  <span class="countdown-label">Minutos</span>
+                </div>
+                <div class="countdown-item">
+                  <span id="cd-seconds" class="countdown-number">00</span>
+                  <span class="countdown-label">Segundos</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Itinerario -->
+      <section id="itinerario" class="section section-dark">
+        <div class="container">
+          <div class="row justify-content-center mb-4">
+            <div class="col-lg-8 text-center" data-aos="fade-up">
+              <p class="section-eyebrow">Nuestro día</p>
+              <h2 class="section-title text-light">Itinerario</h2>
+            </div>
+          </div>
+
+          <div class="row gy-4 justify-content-center">
+            <div class="col-md-6 col-lg-3" data-aos="fade-up">
+              <div class="timeline-card">
+                <div class="timeline-icon">
+                  <i class="fa-regular fa-star"></i>
+                </div>
+                <h3 class="timeline-title">Sesión de fotos</h3>
+                <p class="timeline-meta">Viernes 30 de septiembre · 6:00 p.m.</p>
+                <p class="timeline-text">
+                  Lugar de la sesión de fotos.<br />
+                  <a
+                    href="#"
+                    target="_blank"
+                    rel="noopener"
+                    class="btn btn-outline-light btn-sm mt-2"
+                  >
+                    Ver mapa
+                  </a>
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="50">
+              <div class="timeline-card">
+                <div class="timeline-icon">
+                  <i class="fa-solid fa-church"></i>
+                </div>
+                <h3 class="timeline-title">Misa de acción de gracias</h3>
+                <p class="timeline-meta">Sábado 1 de octubre · 7:00 p.m.</p>
+                <p class="timeline-text">
+                  Nombre del templo.<br />
+                  <a
+                    href="#"
+                    target="_blank"
+                    rel="noopener"
+                    class="btn btn-outline-light btn-sm mt-2"
+                  >
+                    Ver mapa
+                  </a>
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+              <div class="timeline-card">
+                <div class="timeline-icon">
+                  <i class="fa-solid fa-champagne-glasses"></i>
+                </div>
+                <h3 class="timeline-title">Recepción</h3>
+                <p class="timeline-meta">Sábado 1 de octubre · 9:00 p.m.</p>
+                <p class="timeline-text">
+                  Nombre del salón de eventos.<br />
+                  <a
+                    href="#"
+                    target="_blank"
+                    rel="noopener"
+                    class="btn btn-outline-light btn-sm mt-2"
+                  >
+                    Ver mapa
+                  </a>
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="150">
+              <div class="timeline-card">
+                <div class="timeline-icon">
+                  <i class="fa-solid fa-music"></i>
+                </div>
+                <h3 class="timeline-title">Fiesta</h3>
+                <p class="timeline-meta">A partir de las 10:30 p.m.</p>
+                <p class="timeline-text">Baile, sorpresas y mucha diversión.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dress Code -->
+      <section id="dresscode" class="section section-light">
+        <div class="container">
+          <div class="row justify-content-center align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
+              <p class="section-eyebrow">Dress code</p>
+              <h2 class="section-title">Código de vestimenta</h2>
+              <p class="section-text">
+                <strong>Formal de noche.</strong><br />
+                La recepción será en un área techada con acceso a terraza. Te recomendamos usar
+                calzado cómodo y una prenda ligera por si refresca por la noche.
+              </p>
+              <p class="section-text mb-0">
+                Agradecemos evitar tonos blanco o marfil para respetar el atuendo de la festejada.
+              </p>
+            </div>
+            <div class="col-lg-4 text-center" data-aos="fade-left">
+              <img
+                src="images/dresscode-placeholder.svg"
+                alt="Ilustración código de vestimenta"
+                class="img-fluid dresscode-illustration"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Mesa de regalos -->
+      <section id="mesa-regalos" class="section section-gift">
+        <div class="container">
+          <div class="row justify-content-center text-center">
+            <div class="col-lg-8" data-aos="fade-up">
+              <p class="section-eyebrow">Mesa de regalos</p>
+              <h2 class="section-title">Tu presencia es nuestro mejor regalo</h2>
+              <p class="section-text">
+                Si deseas hacernos un obsequio, hemos preparado algunas opciones en una mesa de
+                regalos.
+              </p>
+              <a href="regalos.html" class="btn btn-outline-dark"> Ver opciones </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RSVP -->
+      <section id="rsvp" class="section section-rsvp">
+        <div class="section-overlay"></div>
+        <div class="container position-relative">
+          <div class="row justify-content-center mb-4">
+            <div class="col-lg-8 text-center text-light" data-aos="fade-up">
+              <p class="section-eyebrow text-light">RSVP</p>
+              <h2 class="section-title text-light">Confirmación de asistencia</h2>
+              <p class="section-text text-light">
+                Ayúdanos confirmando tu asistencia lo antes posible. Puedes ajustar el número de
+                acompañantes permitidos en tu invitación.
+              </p>
+            </div>
+          </div>
+
+          <div class="row justify-content-center">
+            <div class="col-lg-8">
+              <div class="rsvp-card" data-aos="fade-up" data-aos-delay="100">
+                <form id="rsvp-form" novalidate>
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <label for="rsvp-nombre" class="form-label">Nombre completo</label>
+                      <input
+                        type="text"
+                        id="rsvp-nombre"
+                        name="nombre"
+                        class="form-control"
+                        required
+                      />
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="rsvp-telefono" class="form-label">Teléfono</label>
+                      <input
+                        type="tel"
+                        id="rsvp-telefono"
+                        name="telefono"
+                        class="form-control"
+                        required
+                      />
+                    </div>
+
+                    <div class="col-md-6">
+                      <label class="form-label d-block">Número de personas</label>
+                      <div class="personas-field" data-personas>
+                        <button
+                          type="button"
+                          class="personas-btn"
+                          data-personas-minus
+                          aria-label="Disminuir personas"
+                        >
+                          <i class="fa-solid fa-minus"></i>
+                        </button>
+                        <span class="personas-value" data-personas-value>1</span>
+                        <button
+                          type="button"
+                          class="personas-btn"
+                          data-personas-plus
+                          aria-label="Aumentar personas"
+                        >
+                          <i class="fa-solid fa-plus"></i>
+                        </button>
+                        <input type="hidden" name="personas" value="1" />
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="rsvp-alergias" class="form-label">Alergias o restricciones</label>
+                      <input
+                        type="text"
+                        id="rsvp-alergias"
+                        name="alergias"
+                        class="form-control"
+                        placeholder="Ej. mariscos, frutos secos..."
+                      />
+                    </div>
+
+                    <div class="col-md-6">
+                      <p class="form-label mb-2">¿Asistirás a la misa?</p>
+                      <div class="d-flex gap-3 flex-wrap">
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="asistencia_misa"
+                            id="misa-si"
+                            value="si"
+                            checked
+                          />
+                          <label class="form-check-label" for="misa-si">Sí asistiré</label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="asistencia_misa"
+                            id="misa-no"
+                            value="no"
+                          />
+                          <label class="form-check-label" for="misa-no">No podré asistir</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <p class="form-label mb-2">¿Asistirás a la recepción?</p>
+                      <div class="d-flex gap-3 flex-wrap">
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="asistencia_recepcion"
+                            id="recepcion-si"
+                            value="si"
+                            checked
+                          />
+                          <label class="form-check-label" for="recepcion-si">Sí asistiré</label>
+                        </div>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="asistencia_recepcion"
+                            id="recepcion-no"
+                            value="no"
+                          />
+                          <label class="form-check-label" for="recepcion-no"
+                            >No podré asistir</label
+                          >
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <label for="rsvp-comentarios" class="form-label">Comentarios</label>
+                      <textarea
+                        id="rsvp-comentarios"
+                        name="comentarios"
+                        rows="3"
+                        class="form-control"
+                        placeholder="Mensaje para la festejada o información adicional"
+                      ></textarea>
+                    </div>
+
+                    <div class="col-12 text-center mt-2">
+                      <button type="submit" class="btn btn-light btn-lg">
+                        Enviar confirmación
+                      </button>
+                      <p class="rsvp-feedback mt-3" id="rsvp-feedback" aria-live="polite"></p>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Transporte -->
+      <section id="transporte" class="section section-light">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-8 text-center" data-aos="fade-up">
+              <p class="section-eyebrow">Transporte</p>
+              <h2 class="section-title">Traslados</h2>
+              <p class="section-text">
+                Contaremos con transportación <strong>Hotel - Salón - Hotel</strong> para los
+                huéspedes de un hotel asignado. Si deseas utilizar este servicio, por favor
+                regístrate en el siguiente enlace.
+              </p>
+              <a href="transporte.html" class="btn btn-outline-dark">
+                Registrarme para transporte
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Clima + Qué hacer -->
+      <section id="clima" class="section section-weather">
+        <div class="container">
+          <div class="row gy-5 align-items-start">
+            <div class="col-lg-5" data-aos="fade-right">
+              <p class="section-eyebrow">Clima</p>
+              <h2 class="section-title">Prepárate para el clima</h2>
+              <p class="section-text">
+                En Monterrey el clima puede cambiar rápidamente. Te recomendamos revisar el
+                pronóstico durante la semana del evento para elegir mejor tu outfit.
+              </p>
+              <a
+                class="weatherwidget-io"
+                href="https://forecast7.com/es/25d69n100d32/monterrey/"
+                data-label_1="MONTERREY"
+                data-label_2="PRONÓSTICO"
+              >
+                MONTERREY
+              </a>
+              <script>
+                !(function (d, s, id) {
+                  var js,
+                    fjs = d.getElementsByTagName(s)[0];
+                  if (!d.getElementById(id)) {
+                    js = d.createElement(s);
+                    js.id = id;
+                    js.src = 'https://weatherwidget.io/js/widget.min.js';
+                    fjs.parentNode.insertBefore(js, fjs);
+                  }
+                })(document, 'script', 'weatherwidget-io-js');
+              </script>
+            </div>
+
+            <div class="col-lg-7" id="que-hacer" data-aos="fade-left">
+              <p class="section-eyebrow">Qué hacer en Monterrey</p>
+              <h2 class="section-title">Disfruta tu visita</h2>
+              <div class="row g-4 mt-1">
+                <div class="col-md-4">
+                  <h3 class="mini-title">Shopping</h3>
+                  <p class="section-text small">
+                    Punto Valle<br />
+                    Paseo San Pedro<br />
+                    Plaza Fiesta San Agustín<br />
+                    Galerías Monterrey
+                  </p>
+                </div>
+                <div class="col-md-4">
+                  <h3 class="mini-title">Restaurantes</h3>
+                  <p class="section-text small">
+                    Zona Arboleda<br />
+                    Metropolitan Center<br />
+                    Distrito Armida<br />
+                    Pueblo Serena
+                  </p>
+                </div>
+                <div class="col-md-4">
+                  <h3 class="mini-title">Lugares turísticos</h3>
+                  <p class="section-text small">
+                    Parque Fundidora<br />
+                    La Huasteca<br />
+                    Chipinque<br />
+                    Cola de Caballo
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Hospedaje + Hair & Makeup -->
+      <section id="hospedaje" class="section section-hospedaje">
+        <div class="container">
+          <div class="row gy-5">
+            <div class="col-lg-6" data-aos="fade-right">
+              <p class="section-eyebrow">Hospedaje</p>
+              <h2 class="section-title">Hoteles sugeridos</h2>
+
+              <div class="hotel-card">
+                <h3 class="mini-title">Hotel Las Palomas de Santiago</h3>
+                <p class="section-text small mb-2">Dirección completa del hotel.<br /></p>
+                <a href="#" target="_blank" rel="noopener" class="btn btn-outline-dark btn-sm">
+                  Ver mapa
+                </a>
+              </div>
+
+              <div class="hotel-card">
+                <h3 class="mini-title">Hotel Gamma Monterrey Rincón de Santiago</h3>
+                <p class="section-text small mb-2">Dirección completa del hotel.<br /></p>
+                <a href="#" target="_blank" rel="noopener" class="btn btn-outline-dark btn-sm">
+                  Ver mapa
+                </a>
+              </div>
+            </div>
+
+            <div class="col-lg-6" data-aos="fade-left">
+              <p class="section-eyebrow">Hair &amp; Makeup</p>
+              <h2 class="section-title">Arreglos para el gran día</h2>
+
+              <div class="hotel-card">
+                <h3 class="mini-title">Ponte Guapa</h3>
+                <p class="section-text small mb-1">
+                  <i class="fa-brands fa-instagram me-2"></i> @ponteguapamx<br />
+                  Tel: +52 81 0000 0000
+                </p>
+                <a href="#" target="_blank" rel="noopener" class="btn btn-outline-dark btn-sm">
+                  Ver mapa
+                </a>
+              </div>
+
+              <div class="hotel-card">
+                <h3 class="mini-title">Oh Express</h3>
+                <p class="section-text small mb-1">
+                  <i class="fa-brands fa-instagram me-2"></i> @ohexpress<br />
+                  Tel: +52 81 0000 0000
+                </p>
+                <a href="#" target="_blank" rel="noopener" class="btn btn-outline-dark btn-sm">
+                  Ver mapa
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Extras -->
+      <section id="extras" class="section section-extras">
+        <div class="container">
+          <div class="row gy-5">
+            <div class="col-lg-6" data-aos="fade-right">
+              <p class="section-eyebrow">Extras</p>
+              <h2 class="section-title">Música</h2>
+              <p class="section-text">
+                ¿Qué canción no puede faltar en la fiesta? Escríbenos tu sugerencia y quién la
+                dedica.
+              </p>
+
+              <form id="song-form" class="song-form" novalidate>
+                <div class="mb-3">
+                  <label for="song-nombre" class="form-label">Canción</label>
+                  <input
+                    type="text"
+                    id="song-nombre"
+                    name="cancion"
+                    class="form-control"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="song-dedica" class="form-label">¿Quién la envía?</label>
+                  <input
+                    type="text"
+                    id="song-dedica"
+                    name="dedicatoria"
+                    class="form-control"
+                    required
+                  />
+                </div>
+                <button type="submit" class="btn btn-outline-dark">Enviar canción</button>
+                <p class="form-feedback mt-2" id="song-feedback" aria-live="polite"></p>
+              </form>
+            </div>
+
+            <div class="col-lg-6" data-aos="fade-left">
+              <p class="section-eyebrow">&nbsp;</p>
+              <h2 class="section-title">Buenos deseos</h2>
+              <p class="section-text">
+                Déjanos un mensaje, buenos deseos, consejos o lo que quieras compartir para este
+                momento tan especial.
+              </p>
+              <a href="bestwishes.html" class="btn btn-outline-dark"> Escribir un mensaje </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Galería -->
+      <section id="galeria" class="section section-gallery">
+        <div class="container-fluid px-3 px-md-5">
+          <div class="row justify-content-center mb-4">
+            <div class="col-lg-8 text-center" data-aos="fade-up">
+              <p class="section-eyebrow">Galería</p>
+              <h2 class="section-title">Momentos especiales</h2>
+              <p class="section-text">
+                Aquí podrás ver algunas fotos de la sesión previa y del gran día.
+              </p>
+            </div>
+          </div>
+
+          <div class="gallery-grid" data-aos="fade-up" data-aos-delay="100">
+            <!-- Cada imagen debe existir en /images, son ejemplos -->
+            <a href="images/gallery-1.jpg" class="gallery-item glightbox" data-gallery="xv-gallery">
+              <img src="images/gallery-1.jpg" alt="Foto 1 sesión XV" />
+            </a>
+            <a href="images/gallery-2.jpg" class="gallery-item glightbox" data-gallery="xv-gallery">
+              <img src="images/gallery-2.jpg" alt="Foto 2 sesión XV" />
+            </a>
+            <a href="images/gallery-3.jpg" class="gallery-item glightbox" data-gallery="xv-gallery">
+              <img src="images/gallery-3.jpg" alt="Foto 3 sesión XV" />
+            </a>
+            <a href="images/gallery-4.jpg" class="gallery-item glightbox" data-gallery="xv-gallery">
+              <img src="images/gallery-4.jpg" alt="Foto 4 sesión XV" />
+            </a>
+            <a href="images/gallery-5.jpg" class="gallery-item glightbox" data-gallery="xv-gallery">
+              <img src="images/gallery-5.jpg" alt="Foto 5 sesión XV" />
+            </a>
+            <a href="images/gallery-6.jpg" class="gallery-item glightbox" data-gallery="xv-gallery">
+              <img src="images/gallery-6.jpg" alt="Foto 6 sesión XV" />
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container text-center">
+        <p class="mb-1">
+          &copy; <span id="footer-year"></span> Nombre de la Quinceañera. Todos los derechos
+          reservados.
+        </p>
+        <p class="mb-0 small">
+          Invitación digital desarrollada por
+          <a href="https://tuportafolio.com" target="_blank" rel="noopener">Tu nombre / marca</a>.
+        </p>
+      </div>
+    </footer>
+
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
