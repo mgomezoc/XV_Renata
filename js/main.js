@@ -254,6 +254,27 @@ document.addEventListener('DOMContentLoaded', function () {
     footerYearEl.textContent = new Date().getFullYear();
   }
 
+  // ===== Scroll to Top Button =====
+  const scrollToTopBtn = document.getElementById('scrollToTop');
+  if (scrollToTopBtn) {
+    // Mostrar/ocultar botón según scroll
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 500) {
+        scrollToTopBtn.classList.add('visible');
+      } else {
+        scrollToTopBtn.classList.remove('visible');
+      }
+    });
+
+    // Scroll suave al hacer click
+    scrollToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    });
+  }
+
   // ===== Efecto de partículas mágicas al hacer hover en timeline cards =====
   const timelineCards = document.querySelectorAll('.timeline-card');
   timelineCards.forEach(card => {
