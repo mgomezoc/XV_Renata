@@ -1,6 +1,6 @@
 /* ===========================
    XV Renata - Alice in Wonderland WebAR
-   styles.css - Versión 3 (Estilo Tim Burton)
+   styles.css - Versión 4 (Solo Gato Protagonista)
    =========================== */
 
 * {
@@ -380,53 +380,207 @@ video {
   }
 }
 
-/* ===== GATO DE CHESHIRE ===== */
-.cheshire-cat {
+/* ===== GATOS DE CHESHIRE - EFECTO MÚLTIPLE ===== */
+.cheshire-cats-container {
   position: fixed;
-  top: 90px;
-  right: 10px;
+  top: 80px;
+  right: 5px;
   z-index: 12;
   pointer-events: none;
-  animation: cheshire-float 4s ease-in-out infinite, cheshire-fade 3s ease-in-out infinite;
 }
 
-.cheshire-img {
-  width: 130px;
+.cheshire-cat {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+/* Gato principal - 100% opaco */
+.cheshire-main {
+  z-index: 15;
+  animation: cheshire-float-main 4s ease-in-out infinite;
+}
+
+.cheshire-main .cheshire-img {
+  width: 140px;
   height: auto;
-  filter: drop-shadow(0 0 25px rgba(100, 200, 255, 1))
-          drop-shadow(0 0 50px rgba(138, 76, 255, 0.8))
-          drop-shadow(0 0 75px rgba(255, 100, 200, 0.5));
-  animation: cheshire-glow 2s ease-in-out infinite;
+  filter: drop-shadow(0 0 30px rgba(100, 200, 255, 1))
+          drop-shadow(0 0 60px rgba(138, 76, 255, 1))
+          drop-shadow(0 0 90px rgba(255, 100, 200, 0.8));
+  animation: cheshire-glow-intense 2s ease-in-out infinite;
 }
 
-@keyframes cheshire-float {
+/* Gato fantasma 1 - Semi transparente */
+.cheshire-ghost-1 {
+  z-index: 14;
+  opacity: 0.5;
+  animation: cheshire-float-ghost1 4s ease-in-out infinite;
+}
+
+.cheshire-ghost-1 .cheshire-img {
+  width: 140px;
+  height: auto;
+  filter: drop-shadow(0 0 25px rgba(100, 200, 255, 0.6))
+          drop-shadow(0 0 50px rgba(138, 76, 255, 0.6));
+  animation: cheshire-fade-ghost 3s ease-in-out infinite 0.5s;
+}
+
+/* Gato fantasma 2 - Muy transparente */
+.cheshire-ghost-2 {
+  z-index: 13;
+  opacity: 0.25;
+  animation: cheshire-float-ghost2 4s ease-in-out infinite;
+}
+
+.cheshire-ghost-2 .cheshire-img {
+  width: 140px;
+  height: auto;
+  filter: drop-shadow(0 0 20px rgba(100, 200, 255, 0.4))
+          drop-shadow(0 0 40px rgba(138, 76, 255, 0.4));
+  animation: cheshire-fade-ghost 3s ease-in-out infinite 1s;
+}
+
+/* Animaciones de flotación para cada gato */
+@keyframes cheshire-float-main {
   0%, 100% {
-    transform: translateY(0) scale(1) rotate(0deg);
+    transform: translate(0, 0) scale(1) rotate(0deg);
   }
   50% {
-    transform: translateY(-15px) scale(1.05) rotate(3deg);
+    transform: translate(-5px, -15px) scale(1.05) rotate(3deg);
   }
 }
 
-@keyframes cheshire-fade {
+@keyframes cheshire-float-ghost1 {
   0%, 100% {
-    opacity: 0.85;
+    transform: translate(15px, 10px) scale(0.95) rotate(-2deg);
   }
   50% {
+    transform: translate(10px, -5px) scale(1) rotate(2deg);
+  }
+}
+
+@keyframes cheshire-float-ghost2 {
+  0%, 100% {
+    transform: translate(25px, 15px) scale(0.9) rotate(-3deg);
+  }
+  50% {
+    transform: translate(20px, 0px) scale(0.95) rotate(1deg);
+  }
+}
+
+/* Animación de glow intenso para gato principal */
+@keyframes cheshire-glow-intense {
+  0%, 100% {
+    filter: drop-shadow(0 0 30px rgba(100, 200, 255, 1))
+            drop-shadow(0 0 60px rgba(138, 76, 255, 1))
+            drop-shadow(0 0 90px rgba(255, 100, 200, 0.8));
+  }
+  50% {
+    filter: drop-shadow(0 0 45px rgba(100, 200, 255, 1))
+            drop-shadow(0 0 90px rgba(138, 76, 255, 1))
+            drop-shadow(0 0 120px rgba(255, 100, 200, 1));
+  }
+}
+
+/* Fade para gatos fantasma */
+@keyframes cheshire-fade-ghost {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+/* ===== PARTÍCULAS MÁGICAS DEL GATO ===== */
+.cat-particles {
+  position: fixed;
+  top: 80px;
+  right: 5px;
+  width: 200px;
+  height: 200px;
+  z-index: 11;
+  pointer-events: none;
+}
+
+.cat-particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(100, 200, 255, 1), rgba(138, 76, 255, 0.5));
+  box-shadow: 0 0 20px rgba(100, 200, 255, 0.8), 0 0 40px rgba(138, 76, 255, 0.5);
+  animation: cat-particle-orbit 6s linear infinite;
+}
+
+.cat-particle-1 {
+  width: 10px;
+  height: 10px;
+  animation-delay: 0s;
+  animation-duration: 5s;
+}
+
+.cat-particle-2 {
+  width: 6px;
+  height: 6px;
+  animation-delay: 1s;
+  animation-duration: 7s;
+}
+
+.cat-particle-3 {
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle, rgba(255, 100, 200, 1), rgba(255, 100, 200, 0.5));
+  box-shadow: 0 0 20px rgba(255, 100, 200, 0.8);
+  animation-delay: 2s;
+  animation-duration: 6s;
+}
+
+.cat-particle-4 {
+  width: 7px;
+  height: 7px;
+  animation-delay: 3s;
+  animation-duration: 5.5s;
+}
+
+.cat-particle-5 {
+  width: 9px;
+  height: 9px;
+  background: radial-gradient(circle, rgba(138, 76, 255, 1), rgba(138, 76, 255, 0.5));
+  box-shadow: 0 0 20px rgba(138, 76, 255, 0.8);
+  animation-delay: 4s;
+  animation-duration: 6.5s;
+}
+
+.cat-particle-6 {
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle, rgba(255, 100, 200, 1), rgba(100, 200, 255, 0.5));
+  box-shadow: 0 0 20px rgba(255, 100, 200, 0.8);
+  animation-delay: 5s;
+  animation-duration: 7s;
+}
+
+@keyframes cat-particle-orbit {
+  0% {
+    transform: translate(0, 0) scale(1);
     opacity: 1;
   }
-}
-
-@keyframes cheshire-glow {
-  0%, 100% {
-    filter: drop-shadow(0 0 25px rgba(100, 200, 255, 1))
-            drop-shadow(0 0 50px rgba(138, 76, 255, 0.8))
-            drop-shadow(0 0 75px rgba(255, 100, 200, 0.5));
+  25% {
+    transform: translate(80px, -50px) scale(1.3);
+    opacity: 0.8;
   }
   50% {
-    filter: drop-shadow(0 0 35px rgba(100, 200, 255, 1))
-            drop-shadow(0 0 70px rgba(138, 76, 255, 1))
-            drop-shadow(0 0 100px rgba(255, 100, 200, 0.8));
+    transform: translate(100px, 20px) scale(0.8);
+    opacity: 0.6;
+  }
+  75% {
+    transform: translate(50px, 80px) scale(1.1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
   }
 }
 
@@ -589,73 +743,7 @@ video {
   50% { transform: translateX(-50%) translateY(-5px) scale(1.05); }
 }
 
-/* ===== ELEMENTOS FLOTANTES ===== */
-.floating-element {
-  position: fixed;
-  font-size: 28px;
-  z-index: 7;
-  pointer-events: none;
-  filter: drop-shadow(0 0 15px rgba(138, 76, 255, 0.6))
-          drop-shadow(0 0 25px rgba(255, 100, 200, 0.4));
-  animation: float-random 6s ease-in-out infinite;
-}
-
-.floating-1 {
-  top: 25%;
-  left: 5%;
-  animation-delay: 0s;
-}
-
-.floating-2 {
-  top: 35%;
-  right: 8%;
-  animation-delay: 1s;
-}
-
-.floating-3 {
-  top: 60%;
-  left: 8%;
-  animation-delay: 2s;
-}
-
-.floating-4 {
-  top: 70%;
-  right: 6%;
-  animation-delay: 3s;
-}
-
-.floating-5 {
-  top: 45%;
-  left: 12%;
-  animation-delay: 1.5s;
-}
-
-.floating-6 {
-  top: 55%;
-  right: 10%;
-  animation-delay: 2.5s;
-}
-
-@keyframes float-random {
-  0%, 100% {
-    transform: translate(0, 0) rotate(0deg) scale(1);
-    opacity: 0.6;
-  }
-  25% {
-    transform: translate(10px, -15px) rotate(10deg) scale(1.1);
-    opacity: 0.8;
-  }
-  50% {
-    transform: translate(-5px, -25px) rotate(-5deg) scale(1.05);
-    opacity: 0.9;
-  }
-  75% {
-    transform: translate(8px, -10px) rotate(8deg) scale(1.08);
-    opacity: 0.7;
-  }
-}
-
-/* Partículas mágicas flotantes */
+/* Partículas mágicas flotantes de fondo */
 .magic-particle {
   position: fixed;
   width: 5px;
@@ -735,8 +823,10 @@ video {
     font-size: 24px;
   }
   
-  .cheshire-img {
-    width: 100px;
+  .cheshire-main .cheshire-img,
+  .cheshire-ghost-1 .cheshire-img,
+  .cheshire-ghost-2 .cheshire-img {
+    width: 110px;
   }
   
   .capture-button {
@@ -760,13 +850,14 @@ video {
     height: 28px;
   }
   
-  .floating-element {
-    font-size: 22px;
-  }
-  
   .wonderland-quote p {
     font-size: 13px;
     padding: 8px 18px;
+  }
+  
+  .cat-particles {
+    width: 150px;
+    height: 150px;
   }
 }
 
@@ -775,16 +866,19 @@ video {
     font-size: 40px;
   }
   
-  .cheshire-img {
-    width: 80px;
-  }
-  
-  .floating-element {
-    font-size: 18px;
+  .cheshire-main .cheshire-img,
+  .cheshire-ghost-1 .cheshire-img,
+  .cheshire-ghost-2 .cheshire-img {
+    width: 90px;
   }
   
   .wonderland-logo {
     top: 140px;
+  }
+  
+  .cat-particles {
+    width: 120px;
+    height: 120px;
   }
 }
 
