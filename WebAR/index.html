@@ -20,45 +20,63 @@
     <!-- html2canvas para captura completa -->
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
+    <!-- Google Fonts - Alice in Wonderland style fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Creepster&family=New+Rocker&family=Nosifer&family=Butcherman&family=Eater&display=swap"
+      rel="stylesheet"
+    />
+
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
-    <!-- Debug - OCULTO por defecto -->
-    <div class="debug-info" id="debug-info" style="display: none">
-      📱 <span id="status">Iniciando...</span><br />
-      🎯 <span id="tracking-status">--</span>
+    <!-- Marco decorativo superior -->
+    <div class="decorative-frame frame-top">
+      <div class="frame-corner frame-tl">✦</div>
+      <div class="frame-corner frame-tr">✦</div>
+      <div class="frame-line"></div>
     </div>
 
-    <!-- Título -->
+    <!-- Marco decorativo inferior -->
+    <div class="decorative-frame frame-bottom">
+      <div class="frame-corner frame-bl">✦</div>
+      <div class="frame-corner frame-br">✦</div>
+      <div class="frame-line"></div>
+    </div>
+
+    <!-- Título estilo Alice in Wonderland -->
     <div class="title-overlay">
-      <h1 class="title-main">XV Años</h1>
-      <p class="title-sub">Renata</p>
-      <p class="title-year">2027</p>
+      <h1 class="title-main">
+        <span class="word-xv">XV</span>
+        <span class="word-renata">Renata</span>
+      </h1>
+      <p class="title-sub">1 de Octubre 2027</p>
     </div>
 
-    <!-- Tema -->
-    <div class="theme-badge">
-      <p class="theme-text">✨ Alice in Wonderland ✨</p>
+    <!-- Logo/Subtítulo Alice in Wonderland -->
+    <div class="wonderland-logo">
+      <p class="wonderland-text">
+        <span class="alice-word">Alice</span>
+        <span class="in-word">in</span>
+        <span class="wonderland-word">Wonderland</span>
+      </p>
     </div>
 
-    <!-- Invitación -->
-    <div class="invitation-sign">
-      <p>¡Te esperamos!</p>
-      <p>en Wonderland</p>
+    <!-- Gato de Cheshire flotante -->
+    <div class="cheshire-cat">
+      <img src="images/gato.png" alt="Cheshire Cat" class="cheshire-img" />
     </div>
 
-    <!-- Evento -->
-    <div class="event-info">
-      <p class="event-title">🎭 CELEBRA CON NOSOTROS 🎭</p>
-      <p class="event-detail">📅 1 de Octubre 2027 • 🕖 07:00 p.m.</p>
-      <p class="event-location">📍 San Pedro Garza García, N.L.</p>
+    <!-- Frase icónica -->
+    <div class="wonderland-quote">
+      <p>"We're all mad here"</p>
     </div>
 
-    <!-- Código vestimenta -->
-    <div class="dress-code">👔 Formal de noche con un toque de fantasía</div>
-
-    <!-- BOTÓN DE CAPTURA -->
+    <!-- BOTÓN DE CAPTURA mejorado -->
     <button id="capture-btn" class="capture-button" aria-label="Tomar foto">
+      <div class="capture-ring"></div>
+      <div class="capture-ring-outer"></div>
       <svg
         width="32"
         height="32"
@@ -76,13 +94,15 @@
     <div id="flash" class="flash-overlay"></div>
 
     <!-- Notificación de descarga -->
-    <div id="download-notification" class="download-notification">✅ Foto guardada</div>
+    <div id="download-notification" class="download-notification">✨ ¡Foto capturada! ✨</div>
 
-    <!-- Decoraciones -->
-    <div class="corner-decoration corner-tl">👑</div>
-    <div class="corner-decoration corner-tr">🎩</div>
-    <div class="corner-decoration corner-bl">🌹</div>
-    <div class="corner-decoration corner-br">⏰</div>
+    <!-- Decoraciones flotantes -->
+    <div class="floating-element floating-1">👑</div>
+    <div class="floating-element floating-2">🎩</div>
+    <div class="floating-element floating-3">🌹</div>
+    <div class="floating-element floating-4">⏰</div>
+    <div class="floating-element floating-5">🃏</div>
+    <div class="floating-element floating-6">🫖</div>
 
     <!-- Escena A-Frame -->
     <a-scene

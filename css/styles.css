@@ -256,6 +256,8 @@ a:hover {
   border-radius: 0 0 1rem 1rem;
   margin-top: 0.5rem;
   padding: 1rem;
+  max-height: 80vh;
+  overflow-y: auto;
 }
 
 .navbar-nav .nav-link {
@@ -298,6 +300,8 @@ a:hover {
     border-radius: 0;
     margin-top: 0;
     padding: 0;
+    max-height: none;
+    overflow-y: visible;
   }
   
   .navbar-nav .nav-link {
@@ -316,6 +320,14 @@ a:hover {
   background: url('../images/hero-placeholder.jpg') center center / cover no-repeat;
   color: #ffffff;
   overflow: hidden;
+  padding: 80px 0 40px;
+}
+
+@media (min-width: 768px) {
+  .hero {
+    min-height: 100vh;
+    padding: 0;
+  }
 }
 
 .hero-overlay {
@@ -334,28 +346,36 @@ a:hover {
 .hero-kicker {
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  font-size: 0.85rem;
+  font-size: 0.7rem;
   opacity: 0.95;
   color: var(--color-accent);
   text-shadow: 0 0 15px rgba(244, 197, 66, 0.5);
   font-weight: 600;
 }
 
+@media (min-width: 576px) {
+  .hero-kicker {
+    font-size: 0.85rem;
+  }
+}
+
 .hero-title {
   font-family: 'Alice', 'Cinzel', serif;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  font-size: 3rem;
+  font-size: 2.5rem;
   text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6), 0 0 40px rgba(244, 197, 66, 0.4);
   animation: float 6s ease-in-out infinite;
+  line-height: 1.2;
 }
 
 .hero-subtitle {
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   opacity: 0.95;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+  line-height: 1.6;
 }
 
 @keyframes float {
@@ -370,11 +390,15 @@ a:hover {
 
 @media (min-width: 576px) {
   .hero-title {
-    font-size: 4rem;
+    font-size: 3.5rem;
   }
   
   .hero-subtitle {
     font-size: 1rem;
+  }
+  
+  .hero-kicker {
+    font-size: 0.85rem;
   }
 }
 
@@ -398,9 +422,17 @@ a:hover {
   border-radius: 999px;
   font-weight: 600;
   letter-spacing: 0.08em;
-  padding: 0.75rem 2rem;
+  padding: 0.65rem 1.5rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
+  font-size: 0.85rem;
+}
+
+@media (min-width: 576px) {
+  .hero-cta .btn {
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+  }
 }
 
 .hero-cta .btn:hover {
@@ -1026,4 +1058,76 @@ a:hover {
   color: rgba(244, 197, 66, 0.2);
   letter-spacing: 1rem;
   animation: float 4s ease-in-out infinite;
+}
+
+/* ===========================
+   FIX RESPONSIVE / OVERFLOW
+   (pegar al final del archivo)
+   =========================== */
+
+/* Evita scroll horizontal global */
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Asegura que medios no se salgan */
+img, svg, video, canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Bootstrap pone .navbar-brand nowrap => provoca overflow.
+   Aquí lo hacemos flexible en móvil */
+.navbar .navbar-brand {
+  white-space: normal;            /* permite salto de línea */
+  max-width: calc(100% - 4rem);   /* deja espacio al toggler */
+  line-height: 1.15;
+  letter-spacing: 0.18em;
+  font-size: 0.8rem;
+  text-wrap: balance;             /* si no soporta, lo ignora */
+}
+
+/* Si prefieres 1 sola línea con ellipsis, usa esto y comenta lo de arriba */
+/*
+.navbar .navbar-brand {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 4rem);
+}
+*/
+
+/* Asegura que títulos no rompan layout */
+.hero-title,
+.section-title,
+.mini-title,
+.timeline-title {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* Reduce tracking/tamaños en pantallas muy chicas */
+@media (max-width: 420px) {
+  .navbar .navbar-brand {
+    letter-spacing: 0.12em;
+    font-size: 0.75rem;
+  }
+
+  .hero-title {
+    font-size: 2.1rem;   /* baja un poco vs 2.5rem */
+    letter-spacing: 0.18em;
+  }
+
+  .section-title {
+    font-size: 1.7rem;
+    letter-spacing: 0.08em;
+  }
+}
+
+/* Overlays/pseudo elementos sin overflow raro */
+.hero,
+.section-countdown,
+.section-rsvp {
+  overflow-x: clip;
 }
