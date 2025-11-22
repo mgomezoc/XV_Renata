@@ -1,263 +1,432 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-fullscreen">
-  <title>Posada Panzones 2025 🎄</title>
-  
-  <!-- A-Frame 1.4.2 -->
-  <script src="https://cdn.jsdelivr.net/npm/aframe@1.4.2/dist/aframe-master.min.js"></script>
-  
-  <!-- MindAR Face -->
-  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-face-aframe.prod.js"></script>
-  
-  <!-- html2canvas para captura completa -->
-  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-  
-  <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-  
-  <!-- Debug - OCULTO por defecto -->
-  <div class="debug-info" id="debug-info" style="display: none;">
-    📱 <span id="status">Iniciando...</span><br>
-    🎯 <span id="tracking-status">--</span>
-  </div>
-  
-  <!-- Título -->
-  <div class="title-overlay">
-    <h1 class="title-main">Posada</h1>
-    <p class="title-sub">Panzones</p>
-    <p class="title-year">2025</p>
-  </div>
-  
-  <!-- Patrocinador -->
-  <div class="sponsor">
-    <p class="sponsor-text">Patrocinador oficial</p>
-    <p class="sponsor-name">LB FOODS</p>
-  </div>
-  
-  <!-- NO MAX POSADA -->
-  <div class="no-max-sign">
-    <p>NO MAX</p>
-    <p>POSADA</p>
-  </div>
-  
-  <!-- Evento -->
-  <div class="event-info">
-    <p class="event-title">🎄 ¡TE ESPERAMOS! 🎄</p>
-    <p class="event-detail">📅 12 de Diciembre • 🕖 07:30 p.m.</p>
-    <p class="event-location">📍 Casa López Guel</p>
-  </div>
-  
-  <!-- Código vestimenta -->
-  <div class="dress-code">
-    👔 Código de vestimenta: Rojo, Vino o Negro
-  </div>
-  
-  <!-- BOTÓN DE CAPTURA -->
-  <button id="capture-btn" class="capture-button" aria-label="Tomar foto">
-    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <circle cx="12" cy="12" r="10"/>
-      <circle cx="12" cy="12" r="3"/>
-    </svg>
-  </button>
-  
-  <!-- Flash de captura -->
-  <div id="flash" class="flash-overlay"></div>
-  
-  <!-- Notificación de descarga -->
-  <div id="download-notification" class="download-notification">
-    ✅ Foto guardada
-  </div>
-  
-  <!-- Decoraciones -->
-  <div class="corner-decoration corner-tl">🎄</div>
-  <div class="corner-decoration corner-tr">⭐</div>
-  <div class="corner-decoration corner-bl">🎁</div>
-  <div class="corner-decoration corner-br">🔔</div>
-  
-  <!-- Escena A-Frame -->
-  <a-scene
-    id="ar-scene"
-    mindar-face="autoStart: true; filterMinCF: 0.001; filterBeta: 10"
-    color-space="sRGB"
-    renderer="colorManagement: true; physicallyCorrectLights: true; antialias: false; precision: highp; alpha: true"
-    vr-mode-ui="enabled: false"
-    device-orientation-permission-ui="enabled: false"
-    embedded
-    screenshot="width: 1920; height: 1080"
-  >
-    
-    <a-camera 
-      active="true" 
-      position="0 0 0"
-      look-controls="enabled: false"
-      wasd-controls="enabled: false"
-    ></a-camera>
-    
-    <!-- TODOS LOS ELEMENTOS EN UN SOLO ANCHOR CON COMPONENTE keep-visible -->
-    <a-entity id="face-elements" mindar-face-target="anchorIndex: 10" keep-visible>
-      
-      <!-- GORRO DE SANTA -->
-      <a-entity position="0 0.32 -0.12" rotation="22 0 0" scale="1.8 1.8 1.8">
-        <a-cone 
-          position="0 0.08 0"
-          radius-bottom="0.28" 
-          radius-top="0.03" 
-          height="0.45" 
-          color="#DD0000"
-          material="shader: flat; side: double"
-        ></a-cone>
-        
-        <a-torus 
-          position="0 -0.12 0" 
-          radius="0.29" 
-          radius-tubular="0.04" 
-          color="#FFFFFF"
-          material="shader: flat"
-        ></a-torus>
-        
-        <a-sphere 
-          position="0 0.3 0.06" 
-          radius="0.08" 
-          color="#FFFFFF"
-          material="shader: flat"
-        ></a-sphere>
-      </a-entity>
-      
-      <!-- NARIZ DE RUDOLF -->
-      <a-sphere 
-        position="0 -0.3 0.32" 
-        radius="0.1" 
-        color="#FF0000"
-        material="shader: flat; side: double"
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-fullscreen" />
+    <title>XV Renata — Wonderland AR ✨</title>
+
+    <!-- A-Frame 1.4.2 -->
+    <script src="https://cdn.jsdelivr.net/npm/aframe@1.4.2/dist/aframe-master.min.js"></script>
+
+    <!-- MindAR Face -->
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-face-aframe.prod.js"></script>
+
+    <!-- html2canvas para captura completa -->
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <!-- Debug - OCULTO por defecto -->
+    <div class="debug-info" id="debug-info" style="display: none">
+      📱 <span id="status">Iniciando...</span><br />
+      🎯 <span id="tracking-status">--</span>
+    </div>
+
+    <!-- Título -->
+    <div class="title-overlay">
+      <h1 class="title-main">XV Años</h1>
+      <p class="title-sub">Renata</p>
+      <p class="title-year">2027</p>
+    </div>
+
+    <!-- Tema -->
+    <div class="theme-badge">
+      <p class="theme-text">✨ Alice in Wonderland ✨</p>
+    </div>
+
+    <!-- Invitación -->
+    <div class="invitation-sign">
+      <p>¡Te esperamos!</p>
+      <p>en Wonderland</p>
+    </div>
+
+    <!-- Evento -->
+    <div class="event-info">
+      <p class="event-title">🎭 CELEBRA CON NOSOTROS 🎭</p>
+      <p class="event-detail">📅 1 de Octubre 2027 • 🕖 07:00 p.m.</p>
+      <p class="event-location">📍 San Pedro Garza García, N.L.</p>
+    </div>
+
+    <!-- Código vestimenta -->
+    <div class="dress-code">👔 Formal de noche con un toque de fantasía</div>
+
+    <!-- BOTÓN DE CAPTURA -->
+    <button id="capture-btn" class="capture-button" aria-label="Tomar foto">
+      <svg
+        width="32"
+        height="32"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
       >
+        <circle cx="12" cy="12" r="10" />
+        <circle cx="12" cy="12" r="3" />
+      </svg>
+    </button>
+
+    <!-- Flash de captura -->
+    <div id="flash" class="flash-overlay"></div>
+
+    <!-- Notificación de descarga -->
+    <div id="download-notification" class="download-notification">✅ Foto guardada</div>
+
+    <!-- Decoraciones -->
+    <div class="corner-decoration corner-tl">👑</div>
+    <div class="corner-decoration corner-tr">🎩</div>
+    <div class="corner-decoration corner-bl">🌹</div>
+    <div class="corner-decoration corner-br">⏰</div>
+
+    <!-- Escena A-Frame -->
+    <a-scene
+      id="ar-scene"
+      mindar-face="autoStart: true; filterMinCF: 0.001; filterBeta: 10"
+      color-space="sRGB"
+      renderer="colorManagement: true; physicallyCorrectLights: true; antialias: false; precision: highp; alpha: true"
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: false"
+      embedded
+      screenshot="width: 1920; height: 1080"
+    >
+      <a-camera
+        active="true"
+        position="0 0 0"
+        look-controls="enabled: false"
+        wasd-controls="enabled: false"
+      ></a-camera>
+
+      <!-- TODOS LOS ELEMENTOS EN UN SOLO ANCHOR CON COMPONENTE keep-visible -->
+      <a-entity id="face-elements" mindar-face-target="anchorIndex: 10" keep-visible>
+        <!-- CORONA DE REINA (Queen of Hearts / Alice) -->
+        <a-entity position="0 0.35 -0.15" rotation="0 0 0" scale="1.6 1.6 1.6">
+          <!-- Base de la corona -->
+          <a-cylinder
+            position="0 0 0"
+            radius="0.32"
+            height="0.08"
+            color="#DAA520"
+            material="shader: flat; metalness: 0.8"
+          ></a-cylinder>
+
+          <!-- Aro superior -->
+          <a-torus
+            position="0 0.04 0"
+            radius="0.32"
+            radius-tubular="0.02"
+            color="#FFD700"
+            material="shader: flat; metalness: 0.9"
+          ></a-torus>
+
+          <!-- Picos de la corona (5 picos) -->
+          <a-cone
+            position="0 0.15 0.32"
+            radius-bottom="0.05"
+            radius-top="0.01"
+            height="0.18"
+            color="#DAA520"
+            material="shader: flat"
+            rotation="0 0 0"
+          ></a-cone>
+
+          <a-cone
+            position="0.3 0.15 0.1"
+            radius-bottom="0.05"
+            radius-top="0.01"
+            height="0.18"
+            color="#DAA520"
+            material="shader: flat"
+            rotation="0 70 0"
+          ></a-cone>
+
+          <a-cone
+            position="-0.3 0.15 0.1"
+            radius-bottom="0.05"
+            radius-top="0.01"
+            height="0.18"
+            color="#DAA520"
+            material="shader: flat"
+            rotation="0 -70 0"
+          ></a-cone>
+
+          <a-cone
+            position="0.2 0.15 -0.25"
+            radius-bottom="0.05"
+            radius-top="0.01"
+            height="0.18"
+            color="#DAA520"
+            material="shader: flat"
+            rotation="0 145 0"
+          ></a-cone>
+
+          <a-cone
+            position="-0.2 0.15 -0.25"
+            radius-bottom="0.05"
+            radius-top="0.01"
+            height="0.18"
+            color="#DAA520"
+            material="shader: flat"
+            rotation="0 -145 0"
+          ></a-cone>
+
+          <!-- Gemas en los picos -->
+          <a-sphere
+            position="0 0.24 0.32"
+            radius="0.03"
+            color="#EC5B7E"
+            material="shader: flat; metalness: 1; roughness: 0"
+          ></a-sphere>
+
+          <a-sphere
+            position="0.3 0.24 0.1"
+            radius="0.03"
+            color="#8B5A9D"
+            material="shader: flat; metalness: 1; roughness: 0"
+          ></a-sphere>
+
+          <a-sphere
+            position="-0.3 0.24 0.1"
+            radius="0.03"
+            color="#4CA3A3"
+            material="shader: flat; metalness: 1; roughness: 0"
+          ></a-sphere>
+
+          <a-sphere
+            position="0.2 0.24 -0.25"
+            radius="0.03"
+            color="#F4C542"
+            material="shader: flat; metalness: 1; roughness: 0"
+          ></a-sphere>
+
+          <a-sphere
+            position="-0.2 0.24 -0.25"
+            radius="0.03"
+            color="#EC5B7E"
+            material="shader: flat; metalness: 1; roughness: 0"
+          ></a-sphere>
+        </a-entity>
+
+        <!-- OREJAS DE CONEJO BLANCO -->
+        <a-entity position="0 0.15 -0.1" scale="1.4 1.4 1.4">
+          <!-- Oreja izquierda -->
+          <a-entity position="-0.25 0.15 0" rotation="0 0 -20">
+            <a-cylinder
+              radius="0.04"
+              height="0.35"
+              color="#FFFFFF"
+              material="shader: flat"
+              rotation="0 0 0"
+            ></a-cylinder>
+
+            <a-sphere
+              position="0 0.18 0"
+              radius="0.05"
+              color="#FFFFFF"
+              material="shader: flat"
+            ></a-sphere>
+
+            <!-- Interior rosa -->
+            <a-cylinder
+              radius="0.025"
+              height="0.25"
+              color="#FFB6C1"
+              material="shader: flat"
+              rotation="0 0 0"
+            ></a-cylinder>
+          </a-entity>
+
+          <!-- Oreja derecha -->
+          <a-entity position="0.25 0.15 0" rotation="0 0 20">
+            <a-cylinder
+              radius="0.04"
+              height="0.35"
+              color="#FFFFFF"
+              material="shader: flat"
+              rotation="0 0 0"
+            ></a-cylinder>
+
+            <a-sphere
+              position="0 0.18 0"
+              radius="0.05"
+              color="#FFFFFF"
+              material="shader: flat"
+            ></a-sphere>
+
+            <!-- Interior rosa -->
+            <a-cylinder
+              radius="0.025"
+              height="0.25"
+              color="#FFB6C1"
+              material="shader: flat"
+              rotation="0 0 0"
+            ></a-cylinder>
+          </a-entity>
+        </a-entity>
+
+        <!-- NARIZ DE CONEJO -->
+        <a-entity position="0 -0.25 0.35" scale="1.2 1.2 1.2">
+          <a-sphere radius="0.06" color="#FFB6C1" material="shader: flat">
+            <a-sphere
+              position="0.02 0.02 0.02"
+              radius="0.015"
+              color="#FFFFFF"
+              material="shader: flat; opacity: 0.9"
+            ></a-sphere>
+          </a-sphere>
+        </a-entity>
+
+        <!-- CARTAS FLOTANTES (Naipes) -->
+        <!-- Carta Corazón (izquierda) -->
+        <a-entity position="-0.45 -0.2 0.1" rotation="0 20 -15" scale="0.8 0.8 0.8">
+          <a-box
+            width="0.15"
+            height="0.22"
+            depth="0.01"
+            color="#FFFFFF"
+            material="shader: flat"
+          ></a-box>
+
+          <a-text
+            value="♥"
+            color="#EC5B7E"
+            align="center"
+            width="0.6"
+            position="0 0 0.006"
+          ></a-text>
+        </a-entity>
+
+        <!-- Carta Trébol (derecha) -->
+        <a-entity position="0.45 -0.2 0.1" rotation="0 -20 15" scale="0.8 0.8 0.8">
+          <a-box
+            width="0.15"
+            height="0.22"
+            depth="0.01"
+            color="#FFFFFF"
+            material="shader: flat"
+          ></a-box>
+
+          <a-text
+            value="♣"
+            color="#1a0f2e"
+            align="center"
+            width="0.6"
+            position="0 0 0.006"
+          ></a-text>
+        </a-entity>
+
+        <!-- ROSA ROJA (Queen of Hearts) -->
+        <a-entity position="0 -0.45 0.2" scale="1.3 1.3 1.3">
+          <!-- Pétalos -->
+          <a-sphere
+            radius="0.08"
+            color="#D14563"
+            material="shader: flat"
+            scale="1 0.8 1"
+          ></a-sphere>
+
+          <a-sphere
+            position="0.05 0 0.05"
+            radius="0.06"
+            color="#EC5B7E"
+            material="shader: flat"
+            scale="1 0.8 1"
+          ></a-sphere>
+
+          <a-sphere
+            position="-0.05 0 0.05"
+            radius="0.06"
+            color="#EC5B7E"
+            material="shader: flat"
+            scale="1 0.8 1"
+          ></a-sphere>
+
+          <!-- Centro -->
+          <a-sphere
+            position="0 0 0.08"
+            radius="0.025"
+            color="#FFD700"
+            material="shader: flat"
+          ></a-sphere>
+        </a-entity>
+
+        <!-- SÍMBOLOS MÁGICOS FLOTANTES -->
+        <!-- Estrella izquierda superior -->
+        <a-octahedron
+          position="-0.4 0.2 0"
+          radius="0.05"
+          color="#F4C542"
+          material="shader: flat; metalness: 0.8"
+        ></a-octahedron>
+
+        <!-- Estrella derecha superior -->
+        <a-octahedron
+          position="0.4 0.2 0"
+          radius="0.05"
+          color="#FFD700"
+          material="shader: flat; metalness: 0.8"
+        ></a-octahedron>
+
+        <!-- Diamante izquierda -->
+        <a-entity position="-0.35 -0.05 0.05" rotation="0 0 45">
+          <a-box
+            width="0.06"
+            height="0.06"
+            depth="0.01"
+            color="#8B5A9D"
+            material="shader: flat; metalness: 0.9"
+          ></a-box>
+        </a-entity>
+
+        <!-- Diamante derecha -->
+        <a-entity position="0.35 -0.05 0.05" rotation="0 0 45">
+          <a-box
+            width="0.06"
+            height="0.06"
+            depth="0.01"
+            color="#4CA3A3"
+            material="shader: flat; metalness: 0.9"
+          ></a-box>
+        </a-entity>
+
+        <!-- Partículas brillantes -->
         <a-sphere
-          position="0.03 0.03 0.03"
-          radius="0.025"
-          color="#FFFFFF"
-          material="shader: flat; opacity: 1"
+          position="0.3 0.35 0.1"
+          radius="0.02"
+          color="#FFF8DC"
+          material="shader: flat; opacity: 0.8"
         ></a-sphere>
-      </a-sphere>
-      
-      <!-- BARBA -->
-      <a-entity position="0 -0.42 0.22" scale="2.2 2.2 2.2">
-        <a-sphere 
-          position="0 0 0" 
-          radius="0.18" 
-          color="#FFFFFF"
-          material="shader: flat; side: double"
-          scale="1 1.4 0.95"
+        <a-sphere
+          position="-0.3 0.35 0.1"
+          radius="0.02"
+          color="#FFF8DC"
+          material="shader: flat; opacity: 0.8"
         ></a-sphere>
-        
-        <a-sphere 
-          position="-0.12 -0.05 0" 
-          radius="0.12" 
-          color="#F0F0F0"
-          material="shader: flat"
-          scale="1 1.5 0.9"
+        <a-sphere
+          position="0.25 -0.35 0.1"
+          radius="0.015"
+          color="#FFD700"
+          material="shader: flat; opacity: 0.7"
         ></a-sphere>
-        
-        <a-sphere 
-          position="0.12 -0.05 0" 
-          radius="0.12" 
-          color="#F0F0F0"
-          material="shader: flat"
-          scale="1 1.5 0.9"
-        ></a-sphere>
-        
-        <a-sphere 
-          position="0 -0.12 0.02" 
-          radius="0.13" 
-          color="#FFFFFF"
-          material="shader: flat"
-          scale="0.95 1.6 0.85"
+        <a-sphere
+          position="-0.25 -0.35 0.1"
+          radius="0.015"
+          color="#FFD700"
+          material="shader: flat; opacity: 0.7"
         ></a-sphere>
       </a-entity>
-      
-      <!-- BIGOTE -->
-      <a-entity position="0 -0.27 0.32" scale="1.6 1.6 1.6">
-        <a-box
-          position="-0.1 0 0"
-          width="0.12"
-          height="0.05"
-          depth="0.06"
-          color="#FFFFFF"
-          material="shader: flat"
-          rotation="0 0 -22"
-        ></a-box>
-        
-        <a-box
-          position="0.1 0 0"
-          width="0.12"
-          height="0.05"
-          depth="0.06"
-          color="#FFFFFF"
-          material="shader: flat"
-          rotation="0 0 22"
-        ></a-box>
-        
-        <a-box
-          position="0 0 0"
-          width="0.07"
-          height="0.04"
-          depth="0.06"
-          color="#F5F5F5"
-          material="shader: flat"
-        ></a-box>
-      </a-entity>
-      
-      <!-- ESFERAS NAVIDEÑAS -->
-      <a-sphere 
-        position="-0.44 -0.37 0" 
-        radius="0.06" 
-        color="#FFD700"
-        material="shader: flat; side: double"
-      >
-        <a-cylinder
-          position="0 0.065 0"
-          radius="0.01"
-          height="0.025"
-          color="#DAA520"
-          material="shader: flat"
-        ></a-cylinder>
-      </a-sphere>
-      
-      <a-sphere 
-        position="0.44 -0.37 0" 
-        radius="0.06" 
-        color="#CC0000"
-        material="shader: flat; side: double"
-      >
-        <a-cylinder
-          position="0 0.065 0"
-          radius="0.01"
-          height="0.025"
-          color="#8B0000"
-          material="shader: flat"
-        ></a-cylinder>
-      </a-sphere>
-      
-      <!-- COPOS DE NIEVE -->
-      <a-octahedron position="0.4 0.15 0" radius="0.04" color="#FFFFFF" material="shader: flat"></a-octahedron>
-      <a-octahedron position="-0.4 0.15 0" radius="0.04" color="#FFFFFF" material="shader: flat"></a-octahedron>
-      <a-octahedron position="0.35 -0.1 0" radius="0.03" color="#E6F2FF" material="shader: flat"></a-octahedron>
-      <a-octahedron position="-0.35 -0.1 0" radius="0.03" color="#E6F2FF" material="shader: flat"></a-octahedron>
-      
-    </a-entity>
-    
-    <!-- ILUMINACIÓN -->
-    <a-light type="ambient" intensity="1.5" color="#FFF"></a-light>
-    <a-light type="directional" intensity="1" position="0 1 1" color="#FFF"></a-light>
-    <a-light type="point" intensity="0.5" position="0 0 1" color="#FFF"></a-light>
-    
-  </a-scene>
-  
-  <script src="js/app.js"></script>
-  
-</body>
+
+      <!-- ILUMINACIÓN -->
+      <a-light type="ambient" intensity="1.5" color="#FFF"></a-light>
+      <a-light type="directional" intensity="1" position="0 1 1" color="#FFF"></a-light>
+      <a-light type="point" intensity="0.5" position="0 0 1" color="#F4C542"></a-light>
+    </a-scene>
+
+    <script src="js/app.js"></script>
+  </body>
 </html>

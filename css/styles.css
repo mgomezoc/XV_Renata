@@ -97,8 +97,20 @@ a:hover {
 
 .section {
   position: relative;
-  padding: 5rem 0;
+  padding: 3rem 0;
   z-index: 1;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 5rem 0;
+  }
+}
+
+@media (min-width: 992px) {
+  .section {
+    padding: 6rem 0;
+  }
 }
 
 .section-intro,
@@ -158,13 +170,25 @@ a:hover {
 .section-title {
   font-family: 'Alice', 'Cinzel', 'Times New Roman', serif;
   font-weight: 400;
-  font-size: 2.8rem;
+  font-size: 2rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   margin-bottom: 1.5rem;
   color: var(--color-cream);
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5), 0 0 30px rgba(244, 197, 66, 0.3);
   position: relative;
+}
+
+@media (min-width: 768px) {
+  .section-title {
+    font-size: 2.8rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .section-title {
+    font-size: 3.2rem;
+  }
 }
 
 .section-text {
@@ -201,6 +225,7 @@ a:hover {
   ) !important;
   border-bottom: 2px solid rgba(244, 197, 66, 0.3);
   box-shadow: 0 5px 30px rgba(0, 0, 0, 0.4);
+  padding: 0.75rem 0;
 }
 
 .navbar-brand {
@@ -213,14 +238,35 @@ a:hover {
   font-weight: 600;
 }
 
+.navbar-toggler {
+  border-color: rgba(244, 197, 66, 0.5);
+  padding: 0.5rem 0.75rem;
+}
+
+.navbar-toggler:focus {
+  box-shadow: 0 0 0 0.25rem rgba(244, 197, 66, 0.25);
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(244, 197, 66, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.navbar-collapse {
+  background: linear-gradient(180deg, rgba(26, 15, 46, 0.98), rgba(42, 26, 74, 0.98));
+  border-radius: 0 0 1rem 1rem;
+  margin-top: 0.5rem;
+  padding: 1rem;
+}
+
 .navbar-nav .nav-link {
   text-transform: uppercase;
   letter-spacing: 0.18em;
   font-size: 0.75rem;
   color: rgba(254, 245, 231, 0.9);
-  padding-inline: 1rem;
+  padding: 0.75rem 1rem;
   position: relative;
   font-weight: 500;
+  transition: all 0.3s ease;
 }
 
 .navbar-nav .nav-link::after {
@@ -244,6 +290,20 @@ a:hover {
 .navbar-nav .nav-link:focus {
   color: var(--color-accent);
   text-shadow: 0 0 10px rgba(244, 197, 66, 0.5);
+}
+
+@media (min-width: 768px) {
+  .navbar-collapse {
+    background: transparent;
+    border-radius: 0;
+    margin-top: 0;
+    padding: 0;
+  }
+  
+  .navbar-nav .nav-link {
+    padding-inline: 1rem;
+    padding-block: 0.5rem;
+  }
 }
 
 /* ---------- Hero ---------- */
@@ -285,9 +345,17 @@ a:hover {
   font-family: 'Alice', 'Cinzel', serif;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  font-size: 4rem;
+  font-size: 3rem;
   text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6), 0 0 40px rgba(244, 197, 66, 0.4);
   animation: float 6s ease-in-out infinite;
+}
+
+.hero-subtitle {
+  font-size: 0.95rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.95;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 @keyframes float {
@@ -300,12 +368,30 @@ a:hover {
   }
 }
 
-.hero-subtitle {
-  font-size: 1.1rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  opacity: 0.95;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+@media (min-width: 576px) {
+  .hero-title {
+    font-size: 4rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-title {
+    font-size: 4.5rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .hero-title {
+    font-size: 5rem;
+  }
 }
 
 .hero-cta .btn {
@@ -343,10 +429,10 @@ a:hover {
 
 .audio-toggle {
   position: fixed;
-  right: 1.5rem;
-  bottom: 1.5rem;
-  width: 54px;
-  height: 54px;
+  right: 1rem;
+  bottom: 1rem;
+  width: 50px;
+  height: 50px;
   border-radius: 999px;
   border: 3px solid var(--color-accent);
   background: linear-gradient(135deg, #ec5b7e, #8b5a9d);
@@ -358,6 +444,15 @@ a:hover {
   z-index: 2000;
   cursor: pointer;
   transition: all 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .audio-toggle {
+    right: 1.5rem;
+    bottom: 1.5rem;
+    width: 54px;
+    height: 54px;
+  }
 }
 
 .audio-toggle:hover {
@@ -726,11 +821,17 @@ a:hover {
 .hotel-card {
   background: linear-gradient(135deg, rgba(15, 10, 31, 0.9), rgba(42, 26, 74, 0.85));
   border-radius: var(--radius-md);
-  padding: 1.5rem 1.75rem;
+  padding: 1.5rem;
   margin-bottom: 1.25rem;
   border: 2px solid rgba(244, 197, 66, 0.2);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .hotel-card {
+    padding: 1.5rem 1.75rem;
+  }
 }
 
 .hotel-card:hover {
@@ -844,10 +945,10 @@ a:hover {
 
 .scroll-to-top {
   position: fixed;
-  right: 1.5rem;
-  bottom: 5rem;
-  width: 50px;
-  height: 50px;
+  right: 1rem;
+  bottom: 4.5rem;
+  width: 45px;
+  height: 45px;
   border-radius: 999px;
   border: 2px solid var(--color-accent);
   background: linear-gradient(135deg, rgba(26, 15, 46, 0.95), rgba(139, 90, 157, 0.95));
@@ -862,6 +963,15 @@ a:hover {
   opacity: 0;
   visibility: hidden;
   transform: translateY(20px);
+}
+
+@media (min-width: 768px) {
+  .scroll-to-top {
+    right: 1.5rem;
+    bottom: 5rem;
+    width: 50px;
+    height: 50px;
+  }
 }
 
 .scroll-to-top.visible {
@@ -884,20 +994,12 @@ a:hover {
 /* ---------- Responsive ---------- */
 
 @media (min-width: 576px) {
-  .hero-title {
-    font-size: 4.5rem;
-  }
-
   .countdown-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
 @media (min-width: 768px) {
-  .section {
-    padding: 6rem 0;
-  }
-
   .gallery-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -905,21 +1007,9 @@ a:hover {
   .hero {
     min-height: 100vh;
   }
-
-  .section-title {
-    font-size: 3.2rem;
-  }
 }
 
 @media (min-width: 992px) {
-  .hero-title {
-    font-size: 5rem;
-  }
-
-  .section-title {
-    font-size: 3.5rem;
-  }
-
   .gallery-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
