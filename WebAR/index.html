@@ -7,54 +7,107 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
     />
 
-    <!-- PWA & Mobile Web App Meta Tags -->
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="theme-color" content="#1a0f2e" />
-
-    <!-- Prevent zoom on iOS -->
     <meta name="format-detection" content="telephone=no" />
 
     <title>XV Renata — Wonderland AR ✨</title>
 
-    <!-- Preconexión para mejorar velocidad de carga -->
     <link rel="preconnect" href="https://cdn.jsdelivr.net" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <!-- ====== LIBRERÍAS CRÍTICAS ====== -->
-
-    <!-- WebRTC Adapter para compatibilidad de cámara -->
+    <!-- WebRTC Adapter -->
     <script src="https://cdn.jsdelivr.net/npm/webrtc-adapter@8.2.2/out/adapter.min.js"></script>
 
-    <!-- A-Frame 1.5.0 - Última versión estable -->
+    <!-- A-Frame -->
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
 
-    <!-- MindAR Face Tracking -->
+    <!-- MindAR Face -->
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-face-aframe.prod.js"></script>
 
-    <!-- html2canvas para captura (como fallback) -->
+    <!-- html2canvas (fallback captura) -->
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
-    <!-- Fuentes estilo Alice in Wonderland -->
+    <!-- Fuentes -->
     <link
       href="https://fonts.googleapis.com/css2?family=Creepster&family=New+Rocker&family=Nosifer&family=Butcherman&family=Eater&display=swap"
       rel="stylesheet"
     />
 
-    <!-- Estilos -->
     <link rel="stylesheet" href="css/styles.css" />
-
-    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
 
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="XV Renata - Wonderland AR" />
-    <meta property="og:description" content="Experiencia AR mágica para los XV años de Renata" />
-    <meta property="og:image" content="images/og-preview.jpg" />
-    <meta property="og:type" content="website" />
+    <!-- ===== COMPONENTES PARA GLB ===== -->
+    <script>
+      // Ajusta modelo GLB a un tamaño "humano" y lo recentra
+      AFRAME.registerComponent('fit-gltf', {
+        schema: {
+          targetSize: { type: 'number', default: 0.22 }, // tamaño final aprox
+          yOffset: { type: 'number', default: 0.0 }, // extra arriba/abajo si ocupas
+        },
+        init() {
+          this.el.addEventListener('model-loaded', () => {
+            const obj = this.el.getObject3D('mesh');
+            if (!obj) return;
+
+            obj.updateMatrixWorld(true);
+
+            const box = new THREE.Box3().setFromObject(obj);
+            const size = new THREE.Vector3();
+            box.getSize(size);
+
+            const maxDim = Math.max(size.x, size.y, size.z || 0.0001);
+            const scale = this.data.targetSize / maxDim;
+            obj.scale.setScalar(scale);
+
+            // recalcula bounds después de escalar
+            const box2 = new THREE.Box3().setFromObject(obj);
+            const center = new THREE.Vector3();
+            box2.getCenter(center);
+
+            // centra en 0,0,0
+            obj.position.sub(center);
+
+            // sube para que el "suelo" del modelo quede en y=0
+            const box3 = new THREE.Box3().setFromObject(obj);
+            obj.position.y -= box3.min.y;
+
+            // offset final
+            obj.position.y += this.data.yOffset;
+          });
+        },
+      });
+
+      // Fuerza material unlit con color sólido (evita que se vea negra en móviles)
+      AFRAME.registerComponent('recolor-gltf', {
+        schema: { color: { type: 'color', default: '#8A9B0F' } }, // verde estilo imagen
+        init() {
+          this.el.addEventListener('model-loaded', () => {
+            const obj = this.el.getObject3D('mesh');
+            if (!obj) return;
+
+            const col = new THREE.Color(this.data.color);
+
+            obj.traverse(node => {
+              if (node.isMesh) {
+                node.material = new THREE.MeshBasicMaterial({
+                  color: col,
+                  transparent: true,
+                  opacity: 1,
+                  side: THREE.DoubleSide,
+                });
+                node.material.needsUpdate = true;
+              }
+            });
+          });
+        },
+      });
+    </script>
   </head>
+
   <body>
     <!-- Loading Screen -->
     <div
@@ -110,393 +163,146 @@
       </style>
     </div>
 
-    <!-- Marco decorativo superior -->
-    <div class="decorative-frame frame-top">
-      <div class="frame-corner frame-tl">✦</div>
-      <div class="frame-corner frame-tr">✦</div>
-      <div class="frame-line"></div>
-    </div>
-
-    <!-- Marco decorativo inferior -->
-    <div class="decorative-frame frame-bottom">
-      <div class="frame-corner frame-bl">✦</div>
-      <div class="frame-corner frame-br">✦</div>
-      <div class="frame-line"></div>
-    </div>
-
-    <!-- Título principal -->
-    <div class="title-overlay">
-      <h1 class="title-main">
-        <span class="word-xv">XV</span>
-        <span class="word-renata">Renata</span>
-      </h1>
-      <p class="title-sub">1 de Octubre 2027</p>
-    </div>
-
-    <!-- Logo Alice in Wonderland -->
-    <div class="wonderland-logo">
-      <p class="wonderland-text">
-        <span class="alice-word">Alice</span>
-        <span class="in-word">in</span>
-        <span class="wonderland-word">Wonderland</span>
-      </p>
-    </div>
-
-    <!-- Gatos de Cheshire con efecto múltiple -->
-    <div class="cheshire-cats-container">
-      <!-- Gato principal -->
-      <div class="cheshire-cat cheshire-main">
-        <img src="images/gato.png" alt="Cheshire Cat" class="cheshire-img" loading="eager" />
+    <!-- UI Overlay -->
+    <div
+      id="ui-layer"
+      style="
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 5;
+      "
+    >
+      <div class="decorative-frame frame-top">
+        <div class="frame-corner frame-tl">✦</div>
+        <div class="frame-corner frame-tr">✦</div>
+        <div class="frame-line"></div>
       </div>
-      <!-- Gato fantasma 1 -->
-      <div class="cheshire-cat cheshire-ghost-1">
-        <img src="images/gato.png" alt="Cheshire Cat Ghost" class="cheshire-img" loading="eager" />
+
+      <div class="decorative-frame frame-bottom">
+        <div class="frame-corner frame-bl">✦</div>
+        <div class="frame-corner frame-br">✦</div>
+        <div class="frame-line"></div>
       </div>
-      <!-- Gato fantasma 2 -->
-      <div class="cheshire-cat cheshire-ghost-2">
-        <img src="images/gato.png" alt="Cheshire Cat Ghost" class="cheshire-img" loading="eager" />
+
+      <div class="title-overlay">
+        <h1 class="title-main">
+          <span class="word-xv">XV</span>
+          <span class="word-renata">Renata</span>
+        </h1>
+        <p class="title-sub">1 de Octubre 2027</p>
+      </div>
+
+      <div class="wonderland-logo">
+        <p class="wonderland-text">
+          <span class="alice-word">Alice</span>
+          <span class="in-word">in</span>
+          <span class="wonderland-word">Wonderland</span>
+        </p>
+      </div>
+
+      <div class="cheshire-cats-container">
+        <div class="cheshire-cat cheshire-main">
+          <img src="images/gato.png" alt="Cheshire Cat" class="cheshire-img" loading="eager" />
+        </div>
+        <div class="cheshire-cat cheshire-ghost-1">
+          <img
+            src="images/gato.png"
+            alt="Cheshire Cat Ghost"
+            class="cheshire-img"
+            loading="eager"
+          />
+        </div>
+        <div class="cheshire-cat cheshire-ghost-2">
+          <img
+            src="images/gato.png"
+            alt="Cheshire Cat Ghost"
+            class="cheshire-img"
+            loading="eager"
+          />
+        </div>
+      </div>
+
+      <div class="wonderland-quote">
+        <p>"We're all mad here"</p>
       </div>
     </div>
 
-    <!-- Partículas mágicas del gato -->
-    <div class="cat-particles">
-      <div class="cat-particle cat-particle-1"></div>
-      <div class="cat-particle cat-particle-2"></div>
-      <div class="cat-particle cat-particle-3"></div>
-      <div class="cat-particle cat-particle-4"></div>
-      <div class="cat-particle cat-particle-5"></div>
-      <div class="cat-particle cat-particle-6"></div>
+    <!-- Botón captura -->
+    <div style="position: absolute; bottom: 25px; width: 100%; text-align: center; z-index: 20">
+      <button id="capture-btn" class="capture-button" aria-label="Tomar foto" type="button">
+        <div class="capture-ring"></div>
+        <div class="capture-ring-outer"></div>
+        <svg
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <circle cx="12" cy="12" r="10" />
+          <circle cx="12" cy="12" r="3" />
+        </svg>
+      </button>
     </div>
 
-    <!-- Frase icónica -->
-    <div class="wonderland-quote">
-      <p>"We're all mad here"</p>
-    </div>
-
-    <!-- BOTÓN DE CAPTURA MEJORADO -->
-    <button id="capture-btn" class="capture-button" aria-label="Tomar foto" type="button">
-      <div class="capture-ring"></div>
-      <div class="capture-ring-outer"></div>
-      <svg
-        width="32"
-        height="32"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-      >
-        <circle cx="12" cy="12" r="10" />
-        <circle cx="12" cy="12" r="3" />
-      </svg>
-    </button>
-
-    <!-- Flash de captura -->
     <div id="flash" class="flash-overlay"></div>
-
-    <!-- Notificación de descarga -->
     <div id="download-notification" class="download-notification">✨ ¡Foto capturada! ✨</div>
 
-    <!-- ====== ESCENA A-FRAME CON CONFIGURACIÓN OPTIMIZADA ====== -->
+    <!-- ===== ESCENA AR ===== -->
     <a-scene
       id="ar-scene"
       mindar-face="
         autoStart: true;
         filterMinCF: 0.0001;
         filterBeta: 1000;
-        facingMode: user;
-        maxTrack: 1;
         faceOccluder: false"
-      color-space="sRGB"
       renderer="
         colorManagement: true;
         physicallyCorrectLights: false;
-        antialias: true;
-        precision: highp;
+        preserveDrawingBuffer: true;
         alpha: true;
-        premultipliedAlpha: true;
-        powerPreference: high-performance;
-        logarithmicDepthBuffer: false"
+        sortObjects: true;"
       vr-mode-ui="enabled: false"
       device-orientation-permission-ui="enabled: false"
       embedded
       loading-screen="enabled: false"
-      inspector="false"
-      keyboard-shortcuts="false"
-      screenshot="false"
-      ar-hit-test="enabled: false"
     >
-      <!-- Assets preload -->
       <a-assets timeout="10000">
-        <!-- Puedes precargar texturas aquí si las necesitas -->
+        <a-asset-item id="new-crown" src="crown_model.glb"></a-asset-item>
       </a-assets>
 
       <!-- Cámara -->
-      <a-camera
-        active="true"
-        position="0 0 0"
-        look-controls="enabled: false"
-        wasd-controls="enabled: false"
-        rotation="0 0 0"
-        near="0.01"
-        far="100"
-      ></a-camera>
+      <a-camera active="true" position="0 0 0" look-controls="enabled: false"></a-camera>
 
-      <!-- ANCHOR PRINCIPAL con componente keep-visible -->
+      <!-- Anchor -->
       <a-entity
         id="face-anchor"
         mindar-face-target="anchorIndex: 168"
         keep-visible="fadeTime: 500; minOpacity: 0.7"
       >
-        <!-- CORONA DE REINA MEJORADA -->
-        <a-entity
-          id="crown"
-          position="0 0.35 -0.15"
-          rotation="0 0 0"
-          scale="1.6 1.6 1.6"
-          animation__rotate="
-            property: rotation;
-            to: 0 360 0;
-            dur: 10000;
-            loop: true;
-            easing: linear"
-        >
-          <!-- Base de la corona -->
-          <a-cylinder
-            position="0 0 0"
-            radius="0.32"
-            height="0.08"
-            segments="16"
-            material="
-              color: #DAA520;
-              metalness: 0.8;
-              roughness: 0.2;
-              emissive: #DAA520;
-              emissiveIntensity: 0.1"
-          ></a-cylinder>
-
-          <!-- Aro superior decorativo -->
-          <a-torus
-            position="0 0.04 0"
-            radius="0.32"
-            radius-tubular="0.02"
-            segments-radial="16"
-            segments-tubular="32"
-            material="
-              color: #FFD700;
-              metalness: 0.9;
-              roughness: 0.1;
-              emissive: #FFD700;
-              emissiveIntensity: 0.2"
-          ></a-torus>
-
-          <!-- Picos de la corona (5 picos) con animación -->
-          <a-cone
-            position="0 0.15 0.32"
-            radius-bottom="0.05"
-            radius-top="0.01"
-            height="0.18"
-            material="color: #DAA520; metalness: 0.7"
-            animation__pulse="
-              property: scale;
-              to: 1.1 1.1 1.1;
-              dur: 2000;
-              loop: true;
-              dir: alternate;
-              easing: easeInOutSine"
-          ></a-cone>
-
-          <a-cone
-            position="0.3 0.15 0.1"
-            radius-bottom="0.05"
-            radius-top="0.01"
-            height="0.18"
-            rotation="0 70 0"
-            material="color: #DAA520; metalness: 0.7"
-            animation__pulse="
-              property: scale;
-              to: 1.1 1.1 1.1;
-              dur: 2200;
-              loop: true;
-              dir: alternate;
-              easing: easeInOutSine"
-          ></a-cone>
-
-          <a-cone
-            position="-0.3 0.15 0.1"
-            radius-bottom="0.05"
-            radius-top="0.01"
-            height="0.18"
-            rotation="0 -70 0"
-            material="color: #DAA520; metalness: 0.7"
-            animation__pulse="
-              property: scale;
-              to: 1.1 1.1 1.1;
-              dur: 2400;
-              loop: true;
-              dir: alternate;
-              easing: easeInOutSine"
-          ></a-cone>
-
-          <!-- Gemas brillantes con animación -->
-          <a-sphere
-            position="0 0.24 0.32"
-            radius="0.03"
-            material="
-              color: #EC5B7E;
-              metalness: 1;
-              roughness: 0;
-              emissive: #EC5B7E;
-              emissiveIntensity: 0.5"
-            animation__glow="
-              property: material.emissiveIntensity;
-              from: 0.5;
-              to: 1;
-              dur: 1500;
-              loop: true;
-              dir: alternate"
-          ></a-sphere>
-
-          <a-sphere
-            position="0.3 0.24 0.1"
-            radius="0.03"
-            material="
-              color: #8B5A9D;
-              metalness: 1;
-              roughness: 0;
-              emissive: #8B5A9D;
-              emissiveIntensity: 0.5"
-            animation__glow="
-              property: material.emissiveIntensity;
-              from: 0.5;
-              to: 1;
-              dur: 1700;
-              loop: true;
-              dir: alternate"
-          ></a-sphere>
-
-          <a-sphere
-            position="-0.3 0.24 0.1"
-            radius="0.03"
-            material="
-              color: #4CA3A3;
-              metalness: 1;
-              roughness: 0;
-              emissive: #4CA3A3;
-              emissiveIntensity: 0.5"
-            animation__glow="
-              property: material.emissiveIntensity;
-              from: 0.5;
-              to: 1;
-              dur: 1900;
-              loop: true;
-              dir: alternate"
-          ></a-sphere>
+        <!-- CORONA: más arriba, centrada, menor tamaño -->
+        <a-entity id="crown-container" position="0 0.95 -0.15" rotation="-5 0 0" scale="1 1 1">
+          <a-gltf-model
+            id="crown-model"
+            src="#new-crown"
+            fit-gltf="targetSize: 0.22; yOffset: 0.0"
+            recolor-gltf="color: #8A9B0F"
+          ></a-gltf-model>
         </a-entity>
 
-        <!-- OREJAS DE CONEJO MEJORADAS -->
-        <a-entity id="bunny-ears" position="0 0.15 -0.1" scale="1.4 1.4 1.4">
-          <!-- Oreja izquierda con animación -->
-          <a-entity
-            position="-0.25 0.15 0"
-            rotation="0 0 -20"
-            animation__wobble="
-              property: rotation;
-              to: 0 0 -25;
-              dur: 3000;
-              loop: true;
-              dir: alternate;
-              easing: easeInOutSine"
-          >
-            <a-cylinder
-              radius="0.04"
-              height="0.35"
-              material="color: #FFFFFF; emissive: #FFFFFF; emissiveIntensity: 0.1"
-            ></a-cylinder>
-            <a-sphere position="0 0.18 0" radius="0.05" material="color: #FFFFFF"></a-sphere>
-            <!-- Interior rosa -->
-            <a-cylinder
-              radius="0.025"
-              height="0.25"
-              material="color: #FFB6C1; emissive: #FFB6C1; emissiveIntensity: 0.2"
-            ></a-cylinder>
-          </a-entity>
-
-          <!-- Oreja derecha con animación -->
-          <a-entity
-            position="0.25 0.15 0"
-            rotation="0 0 20"
-            animation__wobble="
-              property: rotation;
-              to: 0 0 25;
-              dur: 3000;
-              loop: true;
-              dir: alternate;
-              easing: easeInOutSine;
-              delay: 500"
-          >
-            <a-cylinder
-              radius="0.04"
-              height="0.35"
-              material="color: #FFFFFF; emissive: #FFFFFF; emissiveIntensity: 0.1"
-            ></a-cylinder>
-            <a-sphere position="0 0.18 0" radius="0.05" material="color: #FFFFFF"></a-sphere>
-            <!-- Interior rosa -->
-            <a-cylinder
-              radius="0.025"
-              height="0.25"
-              material="color: #FFB6C1; emissive: #FFB6C1; emissiveIntensity: 0.2"
-            ></a-cylinder>
-          </a-entity>
-        </a-entity>
-
-        <!-- NARIZ DE CONEJO CON ANIMACIÓN -->
+        <!-- Cartas -->
         <a-entity
-          id="bunny-nose"
-          position="0 -0.25 0.35"
-          scale="1.2 1.2 1.2"
-          animation__pulse="
-            property: scale;
-            to: 1.3 1.3 1.3;
-            dur: 1000;
-            loop: true;
-            dir: alternate;
-            easing: easeInOutQuad"
-        >
-          <a-sphere
-            radius="0.06"
-            material="
-              color: #FFB6C1;
-              emissive: #FFB6C1;
-              emissiveIntensity: 0.3"
-          >
-            <a-sphere
-              position="0.02 0.02 0.02"
-              radius="0.015"
-              material="color: #FFFFFF; opacity: 0.9"
-            ></a-sphere>
-          </a-sphere>
-        </a-entity>
-
-        <!-- CARTAS FLOTANTES CON ANIMACIÓN -->
-        <!-- Carta Corazón -->
-        <a-entity
-          position="-0.45 -0.2 0.1"
+          position="-0.6 -0.3 0"
           rotation="0 20 -15"
           scale="0.8 0.8 0.8"
-          animation__float="
-            property: position;
-            to: -0.45 -0.15 0.1;
-            dur: 2000;
-            loop: true;
-            dir: alternate;
-            easing: easeInOutSine"
+          animation="property: position; to: -0.6 -0.25 0; dur: 2000; loop: true; dir: alternate;"
         >
-          <a-box
-            width="0.15"
-            height="0.22"
-            depth="0.01"
-            material="color: #FFFFFF; emissive: #FFFFFF; emissiveIntensity: 0.1"
-          ></a-box>
+          <a-box width="0.15" height="0.22" depth="0.01" color="white"></a-box>
           <a-text
             value="♥"
             color="#EC5B7E"
@@ -506,25 +312,13 @@
           ></a-text>
         </a-entity>
 
-        <!-- Carta Trébol -->
         <a-entity
-          position="0.45 -0.2 0.1"
+          position="0.6 -0.3 0"
           rotation="0 -20 15"
           scale="0.8 0.8 0.8"
-          animation__float="
-            property: position;
-            to: 0.45 -0.15 0.1;
-            dur: 2200;
-            loop: true;
-            dir: alternate;
-            easing: easeInOutSine"
+          animation="property: position; to: 0.6 -0.25 0; dur: 2200; loop: true; dir: alternate;"
         >
-          <a-box
-            width="0.15"
-            height="0.22"
-            depth="0.01"
-            material="color: #FFFFFF; emissive: #FFFFFF; emissiveIntensity: 0.1"
-          ></a-box>
+          <a-box width="0.15" height="0.22" depth="0.01" color="white"></a-box>
           <a-text
             value="♣"
             color="#1a0f2e"
@@ -533,176 +327,14 @@
             position="0 0 0.006"
           ></a-text>
         </a-entity>
-
-        <!-- ROSA ROJA MEJORADA -->
-        <a-entity
-          id="red-rose"
-          position="0 -0.45 0.2"
-          scale="1.3 1.3 1.3"
-          animation__rotate="
-            property: rotation;
-            to: 0 360 0;
-            dur: 8000;
-            loop: true;
-            easing: linear"
-        >
-          <!-- Pétalos con gradiente -->
-          <a-sphere
-            radius="0.08"
-            scale="1 0.8 1"
-            material="
-              color: #D14563;
-              emissive: #D14563;
-              emissiveIntensity: 0.2"
-          ></a-sphere>
-          <a-sphere
-            position="0.05 0 0.05"
-            radius="0.06"
-            scale="1 0.8 1"
-            material="color: #EC5B7E"
-          ></a-sphere>
-          <a-sphere
-            position="-0.05 0 0.05"
-            radius="0.06"
-            scale="1 0.8 1"
-            material="color: #EC5B7E"
-          ></a-sphere>
-          <!-- Centro dorado -->
-          <a-sphere
-            position="0 0 0.08"
-            radius="0.025"
-            material="
-              color: #FFD700;
-              emissive: #FFD700;
-              emissiveIntensity: 0.5"
-          ></a-sphere>
-        </a-entity>
-
-        <!-- SÍMBOLOS MÁGICOS FLOTANTES -->
-        <!-- Estrellas con animación de pulso -->
-        <a-octahedron
-          position="-0.4 0.2 0"
-          radius="0.05"
-          material="
-            color: #F4C542;
-            metalness: 0.8;
-            emissive: #F4C542;
-            emissiveIntensity: 0.3"
-          animation__pulse="
-            property: scale;
-            to: 1.3 1.3 1.3;
-            dur: 1500;
-            loop: true;
-            dir: alternate"
-        ></a-octahedron>
-
-        <a-octahedron
-          position="0.4 0.2 0"
-          radius="0.05"
-          material="
-            color: #FFD700;
-            metalness: 0.8;
-            emissive: #FFD700;
-            emissiveIntensity: 0.3"
-          animation__pulse="
-            property: scale;
-            to: 1.3 1.3 1.3;
-            dur: 1700;
-            loop: true;
-            dir: alternate"
-        ></a-octahedron>
-
-        <!-- Diamantes con rotación -->
-        <a-entity
-          position="-0.35 -0.05 0.05"
-          rotation="0 0 45"
-          animation__rotate="
-            property: rotation;
-            to: 0 0 405;
-            dur: 4000;
-            loop: true;
-            easing: linear"
-        >
-          <a-box
-            width="0.06"
-            height="0.06"
-            depth="0.01"
-            material="
-              color: #8B5A9D;
-              metalness: 0.9;
-              emissive: #8B5A9D;
-              emissiveIntensity: 0.3"
-          ></a-box>
-        </a-entity>
-
-        <a-entity
-          position="0.35 -0.05 0.05"
-          rotation="0 0 45"
-          animation__rotate="
-            property: rotation;
-            to: 0 0 405;
-            dur: 4500;
-            loop: true;
-            easing: linear"
-        >
-          <a-box
-            width="0.06"
-            height="0.06"
-            depth="0.01"
-            material="
-              color: #4CA3A3;
-              metalness: 0.9;
-              emissive: #4CA3A3;
-              emissiveIntensity: 0.3"
-          ></a-box>
-        </a-entity>
-
-        <!-- Partículas brillantes adicionales -->
-        <a-sphere
-          position="0.3 0.35 0.1"
-          radius="0.02"
-          material="
-            color: #FFF8DC;
-            opacity: 0.8;
-            emissive: #FFF8DC;
-            emissiveIntensity: 0.5"
-          animation__twinkle="
-            property: material.opacity;
-            from: 0.3;
-            to: 1;
-            dur: 1000;
-            loop: true;
-            dir: alternate"
-        ></a-sphere>
-
-        <a-sphere
-          position="-0.3 0.35 0.1"
-          radius="0.02"
-          material="
-            color: #FFF8DC;
-            opacity: 0.8;
-            emissive: #FFF8DC;
-            emissiveIntensity: 0.5"
-          animation__twinkle="
-            property: material.opacity;
-            from: 0.3;
-            to: 1;
-            dur: 1200;
-            loop: true;
-            dir: alternate"
-        ></a-sphere>
       </a-entity>
 
-      <!-- ILUMINACIÓN MEJORADA -->
-      <a-light type="ambient" intensity="1.2" color="#FFFFFF"></a-light>
-      <a-light type="directional" intensity="0.8" position="0 1 1" color="#FFFFFF"></a-light>
-      <a-light type="point" intensity="0.5" position="0 0 1" color="#F4C542"></a-light>
+      <!-- Luz suave (aunque la corona ya no depende de esto) -->
+      <a-light type="ambient" intensity="1.2" color="#ffffff"></a-light>
     </a-scene>
 
-    <!-- Scripts -->
     <script src="js/app.js"></script>
 
-    <!-- Script para ocultar loading screen -->
     <script>
       window.addEventListener('load', () => {
         setTimeout(() => {
@@ -710,9 +342,7 @@
           if (loadingScreen) {
             loadingScreen.style.transition = 'opacity 0.5s';
             loadingScreen.style.opacity = '0';
-            setTimeout(() => {
-              loadingScreen.remove();
-            }, 500);
+            setTimeout(() => loadingScreen.remove(), 500);
           }
         }, 2000);
       });
